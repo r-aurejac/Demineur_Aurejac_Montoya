@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#3806ED"
     tools:context=".ScoreActivity">
 
-    <com.example.demineur_aurejac_montoya.HexagonMaskView
+    <com.example.demineur_aurejac_montoya.HexagonImageView
         android:id="@+id/hexa1"
         android:layout_width="219dp"
         android:layout_height="217dp"
@@ -14,7 +15,7 @@
         android:layout_y="184dp"
         android:background="@android:color/transparent" />
 
-    <com.example.demineur_aurejac_montoya.HexagonMaskView
+    <com.example.demineur_aurejac_montoya.HexagonImageView
         android:id="@+id/hexa2"
         android:layout_width="211dp"
         android:layout_height="217dp"
@@ -22,7 +23,7 @@
         android:layout_y="79dp"
         android:background="@android:color/transparent" />
 
-    <com.example.demineur_aurejac_montoya.HexagonMaskView
+    <com.example.demineur_aurejac_montoya.HexagonImageView
         android:id="@+id/hexa3"
         android:layout_width="225dp"
         android:layout_height="217dp"

@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Toast;
 
 public class ScoreActivity extends AppCompatActivity {
-    HexagonMaskView hexagonMaskView, hexagonMaskView2,  hexagonMaskView3;
+    HexagonImageView hexagonMaskView, hexagonMaskView2,  hexagonMaskView3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
