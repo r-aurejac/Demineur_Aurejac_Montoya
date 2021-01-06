@@ -3,10 +3,12 @@ package com.example.demineur_aurejac_montoya;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.AbsoluteLayout;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-public class GameActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity implements CellListener {
 
     RelativeLayout relativeLayout;
 
@@ -17,15 +19,34 @@ public class GameActivity extends AppCompatActivity {
 
         relativeLayout = findViewById(R.id.relative_layout);
 
-        HexagonImageView imageView = new HexagonImageView(this);
+
+        createCell(500,500);
+
+
+
+
+    }
+
+
+
+    private void createCell(int x, int y)
+    {
+        CellFragment cellFragment = CellFragment.newInstance(new MinesweeperBox());
+        LinearLayout linearLayout = new LinearLayout(this);
+        linearLayout.setId(View.generateViewId());
         RelativeLayout.LayoutParams coords = new RelativeLayout.LayoutParams(100,100);
-        coords.leftMargin = 100; //x
-        coords.topMargin = 200; //y
-        relativeLayout.addView(imageView,coords);
+        coords.leftMargin = x; //x
+        coords.topMargin = y; //y
 
+        getSupportFragmentManager().beginTransaction()
+                .setReorderingAllowed(true)
+                .add(linearLayout.getId(), cellFragment, null)
+                .commit();
+        relativeLayout.addView(linearLayout,coords);
+    }
 
-
-
+    @Override
+    public void onCellClicked() {
 
     }
 }

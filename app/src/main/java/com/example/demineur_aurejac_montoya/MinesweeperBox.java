@@ -1,6 +1,8 @@
 package com.example.demineur_aurejac_montoya;
 
-public class MinesweeperBox {
+import java.io.Serializable;
+
+public class MinesweeperBox implements Serializable {
     private int etat = 0; //0 = rien; 1==révélée; 2=drapeau; 3=?; 4=mine déclenchée; 5=mine révélée; 6=erreur de drapeau(cas possible uniquement quand le jeu est perdu)
     private boolean isMine = false; //y'a t-il une mine sur la case ?
     private boolean isSelected = false;
