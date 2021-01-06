@@ -2,4 +2,19 @@
     <string name="app_name">Demineur_Aurejac_Montoya</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="aide">
+        Le but est de trouver et de marquer les cases de la grille qui camouflent une mine. Si vous cliquez sur une case, celle-ci vous indiquera le nombre de cases adjacentes contenant une mine.
+        Si vous cliquez sur une case n'ayant aucune mine autour d'elle, celle-ci vous révélera automatiquement les cases adjacentes.
+    </string>
+
+    <string name="aide2">
+        Vous pouvez marquer les cases que vous soupçonnez de cacher une mine en plaçant un marqueur dessus à l aide d un clic maintenu. Si vous faites à nouveau un clic maintenu sur une case
+        déjà marquée, vous changerez le marqueur en "?". Ceci vous permet de garder de côté les cases sur lesquelles vous avez un doute pendant que vous continuez à resoudre un puzzle.
+    </string>
+
+    <string name="aide3">
+        Vous remportez la partie lorsque vous parvenez à révéler toutes les cases sans mine. Si vous cliquez sur une case contenant une mine, la partie se terminera. Notez cependant que la première case
+        sur laquelle vous cliquerez lors de chaque partie ne contiendra jamais de mine.
+    </string>
+
 </resources>
