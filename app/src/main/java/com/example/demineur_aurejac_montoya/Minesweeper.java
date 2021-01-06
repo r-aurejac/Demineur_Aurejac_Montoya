@@ -7,6 +7,12 @@ import java.util.Collections;
 
 //trucs à ajouter : option pause, première case trouvée ne peut pas etre une mine
 
+//avec les hexagones, on considère les indices des cases de la manière suivante
+//    0   1   2   3
+//      4   5   6   7
+//    7   8   9  10
+//  ex : 6 = cases[1][2]
+
 public class Minesweeper {
     private int height; //hauteur du jeu
     private int width; // largeur
@@ -71,27 +77,33 @@ public class Minesweeper {
                     int n = 0;
                     //try car les cases n'existent pas forcément
                     try {
-                        if (game[i][j - 1].isMine()) n++;
+                        //voisin au dessus
+                        if (game[i-2][j].isMine()) n++;
                     }
                     catch (java.lang.ArrayIndexOutOfBoundsException e) {}
                     try {
-                        if (game[i + 1][j - 1].isMine()) n++;
+                        //voisin au dessus à gauche
+                        if (game[i - 1][j - 1 + (i%2)].isMine()) n++;
                     }
                     catch (java.lang.ArrayIndexOutOfBoundsException e) {}
                     try {
-                        if (game[i - 1][j].isMine()) n++;
+                        //voisin au dessus à droite
+                        if (game[i - 1][j + (i%2)].isMine()) n++;
                     }
                     catch (java.lang.ArrayIndexOutOfBoundsException e) {}
                     try {
-                        if (game[i + 1][j].isMine()) n++;
+                        //voisin en dessous à gauche
+                        if (game[i + 1][j - 1 +(i%2)].isMine()) n++;
                     }
                     catch (java.lang.ArrayIndexOutOfBoundsException e) {}
                     try {
-                        if (game[i][j + 1].isMine()) n++;
+                        //voisin en dessous à droite
+                        if (game[i + 1][j + (i%2)].isMine()) n++;
                     }
                     catch (java.lang.ArrayIndexOutOfBoundsException e) {}
                     try {
-                        if (game[i + 1][j + 1].isMine()) n++;
+                        //voisin en dessous
+                        if (game[i + 2][j].isMine()) n++;
                     }
                     catch (java.lang.ArrayIndexOutOfBoundsException e) {}
                     game[i][j].setNeighbours(n); //on indique à la case le nombre de mines
