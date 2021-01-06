@@ -85,7 +85,7 @@ public class HexagonImageView extends androidx.appcompat.widget.AppCompatImageVi
 
         // tracage des bordure
 
-        float radiusBorder = radius - (radius / 10);
+        float radiusBorder = radius - 20f;
         float halfRadiusBorder = radiusBorder / 2f;
         float triangleBorderHeight = (float) (Math.sqrt(3.0) * halfRadiusBorder);
         float difBorder = radiusBorder - triangleBorderHeight/2;
@@ -132,7 +132,7 @@ public class HexagonImageView extends androidx.appcompat.widget.AppCompatImageVi
     @Override
     public void onDraw(Canvas c) {
 
-        // dessin de l'hexagone à partir du tarçage
+        // dessin de l'hexagone à partir du traçage
 
         c.drawPath(hexagonBorderPath, mBorderPaint);
         c.clipPath(hexagonPath, Region.Op.INTERSECT);

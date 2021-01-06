@@ -65,6 +65,12 @@ public class CellFragment extends Fragment {
                 Toast.makeText(getContext(),"test",Toast.LENGTH_LONG).show();
             }
         });
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(),"fragment",Toast.LENGTH_SHORT).show();
+            }
+        });
         return view;
     }
 

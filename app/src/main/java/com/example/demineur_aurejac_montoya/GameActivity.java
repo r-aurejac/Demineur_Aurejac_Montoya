@@ -3,6 +3,7 @@ package com.example.demineur_aurejac_montoya;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AbsoluteLayout;
 import android.widget.LinearLayout;
@@ -11,7 +12,8 @@ import android.widget.RelativeLayout;
 public class GameActivity extends AppCompatActivity implements CellListener {
 
     RelativeLayout relativeLayout;
-
+    Minesweeper minesweeper;
+    int cellSize = 170;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,8 +21,8 @@ public class GameActivity extends AppCompatActivity implements CellListener {
 
         relativeLayout = findViewById(R.id.relative_layout);
 
-
-        createCell(500,500);
+        minesweeper = new Minesweeper(16,4,5);
+        createGameBoard();
 
 
 
@@ -28,13 +30,34 @@ public class GameActivity extends AppCompatActivity implements CellListener {
     }
 
 
-
-    private void createCell(int x, int y)
+    private void createGameBoard()
     {
-        CellFragment cellFragment = CellFragment.newInstance(new MinesweeperBox());
+        Log.d("test", String.valueOf(minesweeper.getWidth()));
+        Log.d("test", String.valueOf(minesweeper.getHeight()));
+        for(int i = 0; i< minesweeper.getWidth(); i++)
+        {
+            for(int j = 0; j< minesweeper.getHeight(); j++)
+            {
+                if(j%2 == 0)
+                createCell((cellSize/2)*i + cellSize*i,
+                        (cellSize/2)*j,
+                        minesweeper.getGame()[j][i]);
+                else
+                    createCell( (cellSize/4) + (cellSize/2)*(i+1) + cellSize*i,
+                            (cellSize/2)*j,
+                            minesweeper.getGame()[j][i]);
+            }
+        }
+
+    }
+
+    private void createCell(int x, int y,MinesweeperBox minesweeperBox)
+    {
+
+        CellFragment cellFragment = CellFragment.newInstance(minesweeperBox);
         LinearLayout linearLayout = new LinearLayout(this);
         linearLayout.setId(View.generateViewId());
-        RelativeLayout.LayoutParams coords = new RelativeLayout.LayoutParams(100,100);
+        RelativeLayout.LayoutParams coords = new RelativeLayout.LayoutParams(cellSize,cellSize);
         coords.leftMargin = x; //x
         coords.topMargin = y; //y
 

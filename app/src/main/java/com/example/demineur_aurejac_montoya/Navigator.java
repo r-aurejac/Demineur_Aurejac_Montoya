@@ -13,16 +13,19 @@ public class Navigator {
 
     public void goToScoreActivity() {
         Intent intent = new Intent(context, ScoreActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }
 
     public void goToOptionsActivity() {
         Intent intent = new Intent(context, OptionsActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }
 
     public void goToGameActivity() {
         Intent intent = new Intent(context, GameActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }
 }
