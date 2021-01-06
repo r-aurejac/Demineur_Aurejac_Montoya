@@ -16,7 +16,7 @@ public class Minesweeper {
     private int nFlags; //nombre de drapeaux posés
     private int nBoxes; //nombre de cases du jeu (largeur*hauteur)
     private int nRemainingBoxes;
-    private MinesweeperBox[][] game; //jeu
+    private MinesweeperBox[][] game; // jeu
 
     private boolean isLost;
     private boolean isWon;

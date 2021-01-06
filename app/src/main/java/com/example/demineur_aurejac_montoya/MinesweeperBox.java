@@ -4,7 +4,7 @@ public class MinesweeperBox {
     private int etat = 0; //0 = rien; 1==révélée; 2=drapeau; 3=?; 4=mine déclenchée; 5=mine révélée; 6=erreur de drapeau(cas possible uniquement quand le jeu est perdu)
     private boolean isMine = false; //y'a t-il une mine sur la case ?
     private boolean isSelected = false;
-    private boolean isBlocked = false; //bouton bloqué
+    private boolean isBlocked = false; // bouton bloqué
     private int neighbours; //nb de mines voisines
 
     public int getEtat(){
