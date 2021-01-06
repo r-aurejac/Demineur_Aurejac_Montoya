@@ -15,4 +15,9 @@ public class Navigator {
         Intent intent = new Intent(context, ScoreActivity.class);
         context.startActivity(intent);
     }
+
+    public void goToOptionsActivity() {
+        Intent intent = new Intent(context, OptionsActivity.class);
+        context.startActivity(intent);
+    }
 }
