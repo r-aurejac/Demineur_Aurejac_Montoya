@@ -113,37 +113,38 @@ public class Minesweeper {
     }
 
     public void Reveal(int y, int x){
+        // y = ligne(i), x = colonne(j)
         //Si la case est normale ou avec un ?
         if ((game[y][x].getEtat() == 0 || game[y][x].getEtat() == 3) && !game[y][x].isMine()) {
             nRemainingBoxes --;
             game[y][x].setEtat(1); //on indique que la case est découverte
             if (game[y][x].getNeighbours() == 0) { // Si le nombre de mines autour est nul, on découvre les cases autour
-                partialReveal1(x-1, y);
-                partialReveal1(x-1, y+1);
-                partialReveal1(x,y-1);
-                partialReveal1(x, y+1);
-                partialReveal1(x+1, y);
-                partialReveal1(x+1, y+1);
+                partialReveal1(x,y-2);
+                partialReveal1(x - 1 + (y%2), y-1);
+                partialReveal1(x + (y%2),y-1);
+                partialReveal1(x - 1 + (y%2), y+1);
+                partialReveal1(x + (y%2), y+1);
+                partialReveal1(x, y+2);
             }
         }
 
         //Si on est au dessus d'un chiffre
         else if (game[y][x].getEtat() == 1 && game[y][x].getNeighbours() != 0) {
             int n = 0; //on compte le nombre de drapeaux placés
-            if (partialReveal2(x-1, y)) n++;
-            if (partialReveal2(x-1, y+1)) n++;
-            if (partialReveal2(x,y-1)) n++;
-            if (partialReveal2(x, y+1)) n++;
-            if (partialReveal2(x+1, y)) n++;
-            if (partialReveal2(x+1, y+1)) n++;
+            if (partialReveal2(x, y-2)) n++;
+            if (partialReveal2(x - 1 + (y%2), y-1)) n++;
+            if (partialReveal2(x + (y%2),y-1)) n++;
+            if (partialReveal2(x - 1 + (y%2), y+1)) n++;
+            if (partialReveal2(x + (y%2), y+1)) n++;
+            if (partialReveal2(x, y+2)) n++;
 
             if (n == game[y][x].getNeighbours()) { //si il y en a autant que le nombre de mines autour, on découvre les 8 cases autour par un appel récursif de decouvre(int, int)
-                if(partialReveal3(x-1, y)) Reveal(y, x-1);
-                if(partialReveal3(x-1, y+1)) Reveal(y+1, x-1);
-                if(partialReveal3(x,y-1)) Reveal(y-1, x);
-                if(partialReveal3(x, y+1)) Reveal(y+1, x);
-                if(partialReveal3(x+1, y)) Reveal(y, x+1);
-                if(partialReveal3(x+1, y+1)) Reveal(y+1, x+1);
+                if(partialReveal3(x, y-2)) Reveal(y-2, x);
+                if(partialReveal3(x - 1 + (y%2), y-1)) Reveal(y-1, x - 1 + (y%2));
+                if(partialReveal3(x + (y%2),y-1)) Reveal(y-1, x + (y%2));
+                if(partialReveal3(x - 1 + (y%2), y+1)) Reveal(y+1, x - 1 + (y%2));
+                if(partialReveal3(x + (y%2), y+1)) Reveal(y+1, x + (y%2));
+                if(partialReveal3(x, y+2)) Reveal(y+2, x);
             }
         }
 
@@ -208,5 +209,15 @@ public class Minesweeper {
                 return true;
         }
         return false;
+    }
+
+    public int getHeight(){
+        return height;
+    }
+    public int getWidth(){
+        return width;
+    }
+    public MinesweeperBox[][] getGame(){
+        return game;
     }
 }
