@@ -1,0 +1,47 @@
+package com.example.demineur_aurejac_montoya;
+
+public class MinesweeperBox {
+    private int etat = 0; //0 = rien; 1==révélée; 2=drapeau; 3=?; 4=mine déclenchée; 5=mine révélée; 6=erreur de drapeau(cas possible uniquement quand le jeu est perdu)
+    private boolean isMine = false; //y'a t-il une mine sur la case ?
+    private boolean isSelected = false;
+    private boolean isBlocked = false; //bouton bloqué
+    private int neighbours; //nb de mines voisines
+
+    public int getEtat(){
+        return etat;
+    }
+    public void setEtat(int etat){
+        this.etat = etat;
+    }
+    public boolean isMine(){
+        return isMine;
+    }
+    public void setMine(boolean isMine){
+        this.isMine = isMine;
+    }
+    public int getNeighbours(){
+        return neighbours;
+    }
+    public void setNeighbours(int neighbours){
+        this.neighbours = neighbours;
+    }
+    public boolean isSelected(){
+        return isSelected;
+    }
+    public void setSelected(boolean isSelected){
+        this.isSelected = isSelected;
+    }
+    public boolean isBlocked(){
+        return isBlocked;
+    }
+    public void setBlocked(boolean isBlocked){
+        this.isBlocked = isBlocked;
+    }
+
+    public void reset() {
+        this.etat = 0;
+        this.isSelected = false;
+        this.isBlocked = false;
+        setMine(false);
+    }
+}
