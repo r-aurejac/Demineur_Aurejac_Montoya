@@ -20,4 +20,9 @@ public class Navigator {
         Intent intent = new Intent(context, OptionsActivity.class);
         context.startActivity(intent);
     }
+
+    public void goToGameActivity() {
+        Intent intent = new Intent(context, GameActivity.class);
+        context.startActivity(intent);
+    }
 }

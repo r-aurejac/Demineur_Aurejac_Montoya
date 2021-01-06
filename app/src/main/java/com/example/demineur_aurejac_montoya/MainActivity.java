@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button scoreButton;
+    Button scoreButton,gameButton,optionsButton;
     Navigator navigator;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +23,22 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 navigator.goToScoreActivity();
+            }
+        });
+
+        gameButton = findViewById(R.id.game_button);
+        gameButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navigator.goToGameActivity();
+            }
+        });
+
+        optionsButton = findViewById(R.id.options_button);
+        optionsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navigator.goToOptionsActivity();
             }
         });
 
