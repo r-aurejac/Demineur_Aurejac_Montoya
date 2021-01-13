@@ -78,6 +78,8 @@ public class GameActivity extends AppCompatActivity implements CellListener {
             cellFragment.updatePicture();
     }
 
+
+
     @Override
     public void onCellClicked(int x,int y) {
         if(!minesweeper.isStarted){

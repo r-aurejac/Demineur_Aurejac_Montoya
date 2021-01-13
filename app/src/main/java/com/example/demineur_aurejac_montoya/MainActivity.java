@@ -22,7 +22,8 @@ public class MainActivity extends AppCompatActivity {
         scoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navigator.goToScoreActivity();
+
+                showChooseDifficultyDialog();
             }
         });
 
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         gameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navigator.goToGameActivity();
+                showChooseDifficultyDialog();
             }
         });
 
@@ -49,6 +50,29 @@ public class MainActivity extends AppCompatActivity {
                 navigator.goToHelpActivity();
             }
         });
+
+    }
+
+    void showChooseDifficultyDialog()
+    {
+        ChooseDifficultyDialog cdd=new ChooseDifficultyDialog(this);
+        cdd.show();
+    }
+
+    public void startGame(int difficulty)
+    {
+        switch(difficulty)
+        {
+            case(0) :
+                navigator.goToGameActivity();
+                break;
+            case(1) :
+                navigator.goToGameActivity();
+                break;
+            case(2) :
+                navigator.goToGameActivity();
+                break;
+        }
 
     }
 }
