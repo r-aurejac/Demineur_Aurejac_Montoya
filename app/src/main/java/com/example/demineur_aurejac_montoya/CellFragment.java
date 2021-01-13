@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link CellFragment#newInstance} factory method to
@@ -26,6 +28,7 @@ public class CellFragment extends Fragment {
     // TODO: Rename and change types of parameters
 
     CellListener cellListener;
+
     HexagonImageView hexagonImageView;
     MinesweeperBox minesweeperBox;
     int X, Y;
@@ -70,17 +73,16 @@ public class CellFragment extends Fragment {
             }
         });
 
-        ;
         return view;
     }
 
     void onCellClicked()
     {
         cellListener.onCellClicked(X,Y);
-        updatePicture();
+
     }
 
-    void updatePicture()
+    public void updatePicture()
     {
         switch(minesweeperBox.getState())
         {

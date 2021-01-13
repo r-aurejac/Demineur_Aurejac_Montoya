@@ -9,11 +9,14 @@ import android.widget.AbsoluteLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import java.util.ArrayList;
+
 public class GameActivity extends AppCompatActivity implements CellListener {
 
     RelativeLayout relativeLayout;
     Minesweeper minesweeper;
     int cellSize = 170;
+    ArrayList<CellFragment> cellFragments;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +25,7 @@ public class GameActivity extends AppCompatActivity implements CellListener {
         relativeLayout = findViewById(R.id.relative_layout);
 
         minesweeper = new Minesweeper(16,4,5);
+        cellFragments = new ArrayList<>();
         createGameBoard();
 
 
@@ -64,12 +68,14 @@ public class GameActivity extends AppCompatActivity implements CellListener {
                 .add(linearLayout.getId(), cellFragment, null)
                 .commit();
         relativeLayout.addView(linearLayout,coords);
+        cellFragments.add(cellFragment);
     }
 
     @Override
     public void onCellClicked(int x,int y) {
         minesweeper.Reveal(y,x);
-
+        for(CellFragment cellFragment : cellFragments)
+            cellFragment.updatePicture();
     }
 
 
