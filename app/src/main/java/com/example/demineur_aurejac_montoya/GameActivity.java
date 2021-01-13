@@ -16,6 +16,7 @@ public class GameActivity extends AppCompatActivity implements CellListener {
 
     RelativeLayout relativeLayout;
     Minesweeper minesweeper;
+    int yOffset = -12;
     int cellSize = 170;
     ArrayList<CellFragment> cellFragments;
     @Override
@@ -42,11 +43,11 @@ public class GameActivity extends AppCompatActivity implements CellListener {
             {
                 if(j%2 == 0)
                 createCell((cellSize/2)*i + cellSize*i,
-                        (cellSize/2)*j,
+                        (cellSize/2)*j+j*yOffset,
                         minesweeper.getGame()[j][i],i,j);
                 else
                     createCell( (cellSize/4) + (cellSize/2)*(i+1) + cellSize*i,
-                            (cellSize/2)*j,
+                            (cellSize/2)*j+j*yOffset,
                             minesweeper.getGame()[j][i],i,j);
             }
         }
