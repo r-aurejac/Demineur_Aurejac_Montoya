@@ -3,17 +3,17 @@ package com.example.demineur_aurejac_montoya;
 import java.io.Serializable;
 
 public class MinesweeperBox implements Serializable {
-    private int etat = 0; //0 = rien; 1==révélée; 2=drapeau; 3=?; 4=mine déclenchée; 5=mine révélée; 6=erreur de drapeau(cas possible uniquement quand le jeu est perdu)
+    private int state = 0; //0 = rien; 1==révélée; 2=drapeau; 3=?; 4=mine déclenchée; 5=mine révélée; 6=erreur de drapeau(cas possible uniquement quand le jeu est perdu)
     private boolean isMine = false; //y'a t-il une mine sur la case ?
     private boolean isSelected = false;
     private boolean isBlocked = false; // bouton bloqué
     private int neighbours; //nb de mines voisines
 
-    public int getEtat(){
-        return etat;
+    public int getState(){
+        return state;
     }
-    public void setEtat(int etat){
-        this.etat = etat;
+    public void setState(int state){
+        this.state = state;
     }
     public boolean isMine(){
         return isMine;
@@ -41,7 +41,7 @@ public class MinesweeperBox implements Serializable {
     }
 
     public void reset() {
-        this.etat = 0;
+        this.state = 0;
         this.isSelected = false;
         this.isBlocked = false;
         setMine(false);

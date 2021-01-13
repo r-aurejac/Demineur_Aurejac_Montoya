@@ -25,15 +25,12 @@ public class GameActivity extends AppCompatActivity implements CellListener {
         createGameBoard();
 
 
-
-
     }
 
 
     private void createGameBoard()
     {
-        Log.d("test", String.valueOf(minesweeper.getWidth()));
-        Log.d("test", String.valueOf(minesweeper.getHeight()));
+
         for(int i = 0; i< minesweeper.getWidth(); i++)
         {
             for(int j = 0; j< minesweeper.getHeight(); j++)
@@ -54,7 +51,7 @@ public class GameActivity extends AppCompatActivity implements CellListener {
     private void createCell(int x, int y,MinesweeperBox minesweeperBox)
     {
 
-        CellFragment cellFragment = CellFragment.newInstance(minesweeperBox);
+        CellFragment cellFragment = CellFragment.newInstance(minesweeperBox,x,y);
         LinearLayout linearLayout = new LinearLayout(this);
         linearLayout.setId(View.generateViewId());
         RelativeLayout.LayoutParams coords = new RelativeLayout.LayoutParams(cellSize,cellSize);
@@ -69,7 +66,9 @@ public class GameActivity extends AppCompatActivity implements CellListener {
     }
 
     @Override
-    public void onCellClicked() {
-
+    public void onCellClicked(int x,int y) {
+        minesweeper.Reveal(y,x);
     }
+
+
 }

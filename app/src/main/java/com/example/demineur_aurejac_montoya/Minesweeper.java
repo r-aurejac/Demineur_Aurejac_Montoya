@@ -1,7 +1,5 @@
 package com.example.demineur_aurejac_montoya;
 
-import android.widget.Button;
-
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -115,9 +113,9 @@ public class Minesweeper {
     public void Reveal(int y, int x){
         // y = ligne(i), x = colonne(j)
         //Si la case est normale ou avec un ?
-        if ((game[y][x].getEtat() == 0 || game[y][x].getEtat() == 3) && !game[y][x].isMine()) {
+        if ((game[y][x].getState() == 0 || game[y][x].getState() == 3) && !game[y][x].isMine()) {
             nRemainingBoxes --;
-            game[y][x].setEtat(1); //on indique que la case est découverte
+            game[y][x].setState(1); //on indique que la case est découverte
             if (game[y][x].getNeighbours() == 0) { // Si le nombre de mines autour est nul, on découvre les cases autour
                 partialReveal1(x,y-2);
                 partialReveal1(x - 1 + (y%2), y-1);
@@ -129,7 +127,7 @@ public class Minesweeper {
         }
 
         //Si on est au dessus d'un chiffre
-        else if (game[y][x].getEtat() == 1 && game[y][x].getNeighbours() != 0) {
+        else if (game[y][x].getState() == 1 && game[y][x].getNeighbours() != 0) {
             int n = 0; //on compte le nombre de drapeaux placés
             if (partialReveal2(x, y-2)) n++;
             if (partialReveal2(x - 1 + (y%2), y-1)) n++;
@@ -149,22 +147,22 @@ public class Minesweeper {
         }
 
         //Si on clique sur une mine
-        else if ((game[y][x].getEtat() == 0 || game[y][x].getEtat() == 3) && game[y][x].isMine()) {
-            game[y][x].setEtat(4); //boum
+        else if ((game[y][x].getState() == 0 || game[y][x].getState() == 3) && game[y][x].isMine()) {
+            game[y][x].setState(4); //boum
             isLost = true;
             for (int i = 0; i < height; i++) {
                 for (int j = 0; j < width; j++) {
                     game[i][j].setBlocked(true);
-                    if (!(y == i && x == j) && mines.get(i * width + j) == 1 && game[i][j].getEtat() != 2)
+                    if (!(y == i && x == j) && mines.get(i * width + j) == 1 && game[i][j].getState() != 2)
                         //si il ya une mine, (recherche par rapport à la chaîne mines
-                        game[i][j].setEtat(5); //on l' affiche
+                        game[i][j].setState(5); //on l' affiche
                 }
             }
             //on affiche les erreurs
             for (int i = 0; i < height; i++) {
                 for (int j = 0; j < width; j++) {
-                    if (game[i][j].getEtat() == 2 && !game[i][j].isMine())
-                        game[i][j].setEtat(6);
+                    if (game[i][j].getState() == 2 && !game[i][j].isMine())
+                        game[i][j].setState(6);
                 }
             }
         }
@@ -175,7 +173,7 @@ public class Minesweeper {
             for (int i = 0; i < height; i++) {
                 for (int j = 0; j < width; j++) {
                     game[i][j].setBlocked(true);
-                    if (game[i][j].isMine()) game[i][j].setEtat(2); //om met des drapeaux partout!!
+                    if (game[i][j].isMine()) game[i][j].setState(2); //om met des drapeaux partout!!
                 }
             }
         }
@@ -184,11 +182,11 @@ public class Minesweeper {
     //si la case existe, on la découvre et si necessaire, on appelle le découvrement des cases autour
     public void partialReveal1(int x, int y) {
         if (x >= 0 && y >= 0 && x < width && y < height) {
-            if (game[y][x].getEtat() == 0 && game[y][x].getNeighbours() != 0) {
-                game[y][x].setEtat(1);
+            if (game[y][x].getState() == 0 && game[y][x].getNeighbours() != 0) {
+                game[y][x].setState(1);
                 nRemainingBoxes--;
             }
-            if (game[y][x].getEtat() == 0 && game[y][x].getNeighbours() == 0)
+            if (game[y][x].getState() == 0 && game[y][x].getNeighbours() == 0)
                 Reveal(y, x); //Si le nombre de mines autour est nul, on découvre les cases autour
         }
     }
@@ -196,7 +194,7 @@ public class Minesweeper {
     //vérifie si la case existe et si elle porte un drapeau
     public boolean partialReveal2(int x, int y) {
         if (x >= 0 && y >= 0 && x < width && y < height) {
-            if (game[y][x].getEtat() == 2)
+            if (game[y][x].getState() == 2)
                 return true;
         }
         return false;
@@ -205,7 +203,7 @@ public class Minesweeper {
     //vérifie si la case existe et si elle n'est pas découverte ou si elle porte un '?'
     public boolean partialReveal3(int x, int y) {
         if (x >= 0 && y >= 0 && x < width && y < height) {
-            if (game[y][x].getEtat() == 0 || game[y][x].getEtat() == 3)
+            if (game[y][x].getState() == 0 || game[y][x].getState() == 3)
                 return true;
         }
         return false;
