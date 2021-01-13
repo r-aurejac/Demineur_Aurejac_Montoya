@@ -65,6 +65,7 @@ public class CellFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_cell, container, false);
 
         hexagonImageView = view.findViewById(R.id.hexagon_image_view);
+        hexagonImageView.setImageResource(R.drawable.empty);
         hexagonImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -96,7 +97,7 @@ public class CellFragment extends Fragment {
                 switch(minesweeperBox.getNeighbours())
                 {
                     case 0 :
-
+                        hexagonImageView.setImageResource(R.drawable.discovered);
                         break;
                     case 1 :
                         hexagonImageView.setImageResource(R.drawable.one);
