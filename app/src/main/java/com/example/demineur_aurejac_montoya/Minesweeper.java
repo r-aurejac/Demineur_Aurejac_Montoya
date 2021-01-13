@@ -40,16 +40,18 @@ public class Minesweeper {
             }
         }
 
-        isStarted = false;
+        Reset();
     }
 
-    public void Reset(){
-        isStarted = true;
+    public void Reset() {
+        isStarted = false;
         isLost = false;
         isWon = false;
         nFlags = 0;
         nRemainingMines = nMines;
+    }
 
+    public void setMines(int y, int x){
         //répartition des mines
         for(int i=0; i<nBoxes; i++){
             if(i<nMines) {
@@ -60,6 +62,14 @@ public class Minesweeper {
             }
         }
         Collections.shuffle(mines);
+        int idx = y*width + x;
+        if(mines.get(idx)==1) {
+            while (mines.get(idx) == 1) {
+                idx = 0 + (int) (Math.random() * nBoxes);
+            }
+            mines.set(y * width + x, 0);
+            mines.set(idx, 1);
+        }
 
         for(int i=0; i<height; i++) {
             for (int j = 0; j < width; j++) {

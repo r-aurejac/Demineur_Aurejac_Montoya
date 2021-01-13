@@ -81,7 +81,8 @@ public class GameActivity extends AppCompatActivity implements CellListener {
     @Override
     public void onCellClicked(int x,int y) {
         if(!minesweeper.isStarted){
-            minesweeper.Reset();
+            minesweeper.isStarted = true;
+            minesweeper.setMines(y,x);
         }
         minesweeper.Reveal(y,x);
         updateAllCellFragments();

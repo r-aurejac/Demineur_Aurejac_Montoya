@@ -43,8 +43,11 @@ public class MinesweeperBox implements Serializable {
         if(getState()==0){
             setState(2);
         }
-        if(getState()==2) {
+        else if(getState()==2) {
             setState(3);
+        }
+        else if(getState()==3) {
+            setState(0);
         }
     }
 
