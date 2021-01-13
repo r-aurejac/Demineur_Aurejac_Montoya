@@ -43,9 +43,7 @@ public class MinesweeperBox implements Serializable {
         if(getState()==0){
             setState(2);
         }
-    }
-    public void setGuess(){
-        if(getState()==2){
+        if(getState()==2) {
             setState(3);
         }
     }
