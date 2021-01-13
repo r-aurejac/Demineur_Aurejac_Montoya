@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AbsoluteLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -71,14 +72,21 @@ public class GameActivity extends AppCompatActivity implements CellListener {
         cellFragments.add(cellFragment);
     }
 
+    private void updateAllCellFragments()
+    {
+        for(CellFragment cellFragment : cellFragments)
+            cellFragment.updatePicture();
+    }
+
     @Override
     public void onCellClicked(int x,int y) {
         if(!minesweeper.isStarted){
             minesweeper.Reset();
         }
         minesweeper.Reveal(y,x);
-        for(CellFragment cellFragment : cellFragments)
-            cellFragment.updatePicture();
+        updateAllCellFragments();
     }
+
+
 
 }

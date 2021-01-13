@@ -68,19 +68,22 @@ public class CellFragment extends Fragment {
         hexagonImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(),"test",Toast.LENGTH_LONG).show();
-                onCellClicked();
+                cellListener.onCellClicked(X,Y);
+            }
+        });
+        hexagonImageView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                minesweeperBox.setFlag();
+                updatePicture();
+                return true;
             }
         });
 
         return view;
     }
 
-    void onCellClicked()
-    {
-        cellListener.onCellClicked(X,Y);
 
-    }
 
     public void updatePicture()
     {
