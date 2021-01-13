@@ -78,5 +78,4 @@ public class GameActivity extends AppCompatActivity implements CellListener {
             cellFragment.updatePicture();
     }
 
-
 }
