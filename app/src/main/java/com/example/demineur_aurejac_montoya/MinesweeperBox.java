@@ -39,6 +39,16 @@ public class MinesweeperBox implements Serializable {
     public void setBlocked(boolean isBlocked){
         this.isBlocked = isBlocked;
     }
+    public void setFlag(){
+        if(getState()==0){
+            setState(2);
+        }
+    }
+    public void setGuess(){
+        if(getState()==2){
+            setState(3);
+        }
+    }
 
     public void reset() {
         this.state = 0;
