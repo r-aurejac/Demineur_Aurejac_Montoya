@@ -8,8 +8,8 @@
     </string>
 
     <string name="aide2">
-        Vous pouvez marquer les cases que vous soupçonnez de cacher une mine en plaçant un marqueur dessus à l\'aide d un clic maintenu. Si vous faites à nouveau un clic maintenu sur une case
-        déjà marquée, vous changerez le marqueur en "?". Ceci vous permet de garder de côté les cases sur lesquelles vous avez un doute pendant que vous continuez à resoudre un puzzle.
+        Vous pouvez marquer les cases que vous soupçonnez de cacher une mine en plaçant un marqueur dessus à l\'aide d\'un clic maintenu. Si vous faites à nouveau un clic maintenu sur une case
+        déjà marquée, vous changerez le marqueur en \"?\". Ceci vous permet de garder de côté les cases sur lesquelles vous avez un doute pendant que vous continuez à résoudre le puzzle.
     </string>
 
     <string name="aide3">

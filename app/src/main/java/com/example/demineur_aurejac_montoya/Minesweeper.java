@@ -22,8 +22,9 @@ public class Minesweeper {
     private int nRemainingBoxes;
     private MinesweeperBox[][] game; // jeu
 
-    private boolean isLost;
-    private boolean isWon;
+    public boolean isStarted;
+    public boolean isLost;
+    public boolean isWon;
 
     public Minesweeper(int height, int width, int nMines){
         this.height = height;
@@ -38,10 +39,12 @@ public class Minesweeper {
                 game[i][j] = new MinesweeperBox();
             }
         }
-        Reset();
+
+        isStarted = false;
     }
 
     public void Reset(){
+        isStarted = true;
         isLost = false;
         isWon = false;
         nFlags = 0;

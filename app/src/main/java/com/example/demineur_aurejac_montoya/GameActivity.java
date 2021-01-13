@@ -24,7 +24,7 @@ public class GameActivity extends AppCompatActivity implements CellListener {
 
         relativeLayout = findViewById(R.id.relative_layout);
 
-        minesweeper = new Minesweeper(16,4,5);
+        minesweeper = new Minesweeper(16,4,12);
         cellFragments = new ArrayList<>();
         createGameBoard();
 
@@ -73,6 +73,9 @@ public class GameActivity extends AppCompatActivity implements CellListener {
 
     @Override
     public void onCellClicked(int x,int y) {
+        if(!minesweeper.isStarted){
+            minesweeper.Reset();
+        }
         minesweeper.Reveal(y,x);
         for(CellFragment cellFragment : cellFragments)
             cellFragment.updatePicture();
