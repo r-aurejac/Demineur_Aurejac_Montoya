@@ -38,25 +38,26 @@ public class GameActivity extends AppCompatActivity implements CellListener {
                 if(j%2 == 0)
                 createCell((cellSize/2)*i + cellSize*i,
                         (cellSize/2)*j,
-                        minesweeper.getGame()[j][i]);
+                        minesweeper.getGame()[j][i],i,j);
                 else
                     createCell( (cellSize/4) + (cellSize/2)*(i+1) + cellSize*i,
                             (cellSize/2)*j,
-                            minesweeper.getGame()[j][i]);
+                            minesweeper.getGame()[j][i],i,j);
             }
         }
 
     }
 
-    private void createCell(int x, int y,MinesweeperBox minesweeperBox)
+    private void createCell(int x, int y,MinesweeperBox minesweeperBox, int line, int column)
     {
 
-        CellFragment cellFragment = CellFragment.newInstance(minesweeperBox,x,y);
+        CellFragment cellFragment = CellFragment.newInstance(minesweeperBox,line,column);
         LinearLayout linearLayout = new LinearLayout(this);
         linearLayout.setId(View.generateViewId());
         RelativeLayout.LayoutParams coords = new RelativeLayout.LayoutParams(cellSize,cellSize);
         coords.leftMargin = x; //x
         coords.topMargin = y; //y
+
 
         getSupportFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
@@ -68,6 +69,7 @@ public class GameActivity extends AppCompatActivity implements CellListener {
     @Override
     public void onCellClicked(int x,int y) {
         minesweeper.Reveal(y,x);
+
     }
 
 

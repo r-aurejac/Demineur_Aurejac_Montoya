@@ -91,7 +91,7 @@ public class CellFragment extends Fragment {
                 switch(minesweeperBox.getNeighbours())
                 {
                     case 0 :
-                        hexagonImageView.setImageResource(R.drawable.empty);
+
                         break;
                     case 1 :
                         hexagonImageView.setImageResource(R.drawable.one);
