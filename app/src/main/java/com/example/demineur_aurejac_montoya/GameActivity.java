@@ -17,6 +17,7 @@ public class GameActivity extends AppCompatActivity implements CellListener {
 
     RelativeLayout relativeLayout;
     Minesweeper minesweeper;
+    Navigator navigator;
     int yOffset = -12;
     int cellSize = 170;
     int difficulty;
@@ -46,6 +47,8 @@ public class GameActivity extends AppCompatActivity implements CellListener {
 
         cellFragments = new ArrayList<>();
         createGameBoard();
+        navigator = new Navigator(this);
+
     }
 
 
@@ -94,7 +97,24 @@ public class GameActivity extends AppCompatActivity implements CellListener {
             cellFragment.updatePicture();
     }
 
+    public void replay()
+    {
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
+    }
 
+    public void goToMainMenu()
+    {
+        navigator.goToMainActivity();
+    }
+
+    void showEndGameDialog(boolean isWon)
+    {
+        EndGameDialog egd =new EndGameDialog(this,isWon);
+        egd.show();
+
+    }
 
     @Override
     public void onCellClicked(int x,int y) {
@@ -104,7 +124,16 @@ public class GameActivity extends AppCompatActivity implements CellListener {
         }
         minesweeper.Reveal(y,x);
         updateAllCellFragments();
+        if(minesweeper.isLost)
+        {
+            showEndGameDialog(false);
+        }
+        else if(minesweeper.isWon)
+        {
+            showEndGameDialog(true);
+        }
     }
+
 
 
 
