@@ -23,8 +23,9 @@ public class Navigator {
         context.startActivity(intent);
     }
 
-    public void goToGameActivity() {
+    public void goToGameActivity(int difficulty) {
         Intent intent = new Intent(context, GameActivity.class);
+        intent.putExtra("difficulty", difficulty);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }

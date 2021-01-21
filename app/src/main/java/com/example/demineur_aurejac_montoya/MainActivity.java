@@ -13,6 +13,8 @@ public class MainActivity extends AppCompatActivity {
 
     Button scoreButton,gameButton,optionsButton,helpButton;
     Navigator navigator;
+    int difficulty;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,18 +63,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void startGame(int difficulty)
     {
-        switch(difficulty)
-        {
-            case(0) :
-                navigator.goToGameActivity();
-                break;
-            case(1) :
-                navigator.goToGameActivity();
-                break;
-            case(2) :
-                navigator.goToGameActivity();
-                break;
-        }
-
+        navigator.goToGameActivity(difficulty);
     }
 }

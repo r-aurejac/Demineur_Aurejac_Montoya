@@ -2,6 +2,7 @@ package com.example.demineur_aurejac_montoya;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +19,7 @@ public class GameActivity extends AppCompatActivity implements CellListener {
     Minesweeper minesweeper;
     int yOffset = -12;
     int cellSize = 170;
+    int difficulty;
     ArrayList<CellFragment> cellFragments;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,11 +28,25 @@ public class GameActivity extends AppCompatActivity implements CellListener {
 
         relativeLayout = findViewById(R.id.relative_layout);
 
-        minesweeper = new Minesweeper(16,4,12);
+        Intent intent = getIntent();
+        if(intent != null) {
+            difficulty = (intent.getIntExtra("difficulty", 0));
+            Toast.makeText(this,String.valueOf(difficulty),Toast.LENGTH_SHORT).show();
+        }
+        switch(difficulty){
+            case 0:
+                minesweeper = new Minesweeper(16,4,10);
+                break;
+            case 1:
+                minesweeper = new Minesweeper(22,4,16);
+                break;
+            case 2:
+                minesweeper = new Minesweeper(26,4,26);
+                break;
+        }
+
         cellFragments = new ArrayList<>();
         createGameBoard();
-
-
     }
 
 
