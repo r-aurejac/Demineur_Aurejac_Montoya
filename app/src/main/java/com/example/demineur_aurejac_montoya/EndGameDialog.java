@@ -29,6 +29,7 @@ public class EndGameDialog extends Dialog implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.dialog_end_game);
+        setCancelable(false);
         imageView = (ImageView) findViewById(R.id.image_view);
         mainMenuButton = (Button) findViewById(R.id.main_menu_button);
         replayButton = (Button) findViewById(R.id.replay_button);

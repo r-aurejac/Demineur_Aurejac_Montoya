@@ -13,7 +13,6 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -30,7 +29,8 @@
             android:textColor="#000000"
             android:textSize="20sp" />
 
-        <Switch
+        <androidx.appcompat.widget.SwitchCompat
+            android:layout_marginTop="16dp"
             android:id="@+id/soundSwitch"
             style="@style/Minesweeper"
             android:layout_width="match_parent"
@@ -38,7 +38,8 @@
             android:layout_weight="0"
             android:text="Son" />
 
-        <Switch
+        <androidx.appcompat.widget.SwitchCompat
+            android:layout_marginTop="16dp"
             android:id="@+id/musicSwitch"
             style="@style/Minesweeper"
             android:layout_width="match_parent"
@@ -47,6 +48,7 @@
             android:text="Musique" />
 
         <Button
+            android:layout_marginTop="16dp"
             android:id="@+id/button3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
