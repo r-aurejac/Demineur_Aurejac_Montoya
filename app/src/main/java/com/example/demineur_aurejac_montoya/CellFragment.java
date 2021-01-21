@@ -5,9 +5,11 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -70,13 +72,14 @@ public class CellFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 cellListener.onCellClicked(X,Y);
+                updatePicture(true);
             }
         });
         hexagonImageView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
                 minesweeperBox.setFlag();
-                updatePicture();
+                updatePicture(false);
                 return true;
             }
         });
@@ -85,8 +88,7 @@ public class CellFragment extends Fragment {
     }
 
 
-
-    public void updatePicture()
+    public void updatePicture(boolean showClickAnimation)
     {
         switch(minesweeperBox.getState())
         {
@@ -94,6 +96,8 @@ public class CellFragment extends Fragment {
                 hexagonImageView.setImageResource(R.drawable.empty);
                 break;
             case 1 :
+                if(showClickAnimation)
+                hexagonImageView.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.click_animation));
                 switch(minesweeperBox.getNeighbours())
                 {
                     case 0 :
@@ -126,9 +130,11 @@ public class CellFragment extends Fragment {
                 hexagonImageView.setImageResource(R.drawable.guess);
                 break;
             case 4 :
+                hexagonImageView.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.mine_animation));
                 hexagonImageView.setImageResource(R.drawable.red_mine);
                 break;
             case 5 :
+                hexagonImageView.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.mine_animation));
                 hexagonImageView.setImageResource(R.drawable.mine);
                 break;
             case 6 :
@@ -146,5 +152,7 @@ public class CellFragment extends Fragment {
             throw new ClassCastException(context.toString() + " must implement OnArticleSelectedListener");
         }
     }
+
+
 
 }
