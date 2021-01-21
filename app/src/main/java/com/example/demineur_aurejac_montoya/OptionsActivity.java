@@ -3,6 +3,7 @@ package com.example.demineur_aurejac_montoya;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +21,7 @@ public class OptionsActivity extends AppCompatActivity {
     boolean musicActivated = true;
     SwitchCompat soundSwitch;
     SwitchCompat musicSwitch;
+    MusicManager musicManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,12 @@ public class OptionsActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 preferences.setMusicActivated(musicSwitch.isChecked());
+                if(musicSwitch.isChecked()){
+                    musicManager.start(getApplicationContext());
+                }
+                else{
+                    musicManager.stop();
+                }
             }
         });
 
