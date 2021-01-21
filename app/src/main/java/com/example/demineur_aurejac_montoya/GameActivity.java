@@ -90,8 +90,17 @@ public class GameActivity extends AppCompatActivity implements CellListener {
     }
 
     private void updateAllCellFragments() {
-        for (CellFragment cellFragment : cellFragments)
-            cellFragment.updatePicture(false);
+        if (minesweeper.isLost || minesweeper.isWon) {
+            for (CellFragment cellFragment : cellFragments) {
+                cellFragment.updatePicture(false);
+                cellFragment.islocked = true;
+            }
+        }
+        else{
+            for (CellFragment cellFragment : cellFragments) {
+                cellFragment.updatePicture(false);
+            }
+        }
     }
 
     public void replay() {

@@ -34,6 +34,7 @@ public class CellFragment extends Fragment {
     HexagonImageView hexagonImageView;
     MinesweeperBox minesweeperBox;
     int X, Y;
+    public boolean islocked = false;
     public CellFragment() {
         // Required empty public constructor
     }
@@ -71,15 +72,19 @@ public class CellFragment extends Fragment {
         hexagonImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cellListener.onCellClicked(X,Y);
-                updatePicture(true);
+                if(!islocked) {
+                    cellListener.onCellClicked(X, Y);
+                    updatePicture(true);
+                }
             }
         });
         hexagonImageView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                minesweeperBox.setFlag();
-                updatePicture(false);
+                if(!islocked) {
+                    minesweeperBox.setFlag();
+                    updatePicture(false);
+                }
                 return true;
             }
         });
