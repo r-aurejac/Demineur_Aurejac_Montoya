@@ -48,12 +48,6 @@ public class OptionsActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 preferences.setMusicActivated(musicSwitch.isChecked());
-                if(musicSwitch.isChecked()){
-                    musicManager.start(getApplicationContext());
-                }
-                else{
-                    musicManager.stop();
-                }
             }
         });
 

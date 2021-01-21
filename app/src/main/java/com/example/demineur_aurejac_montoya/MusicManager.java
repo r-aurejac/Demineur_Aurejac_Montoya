@@ -17,8 +17,10 @@ public class MusicManager {
     }
 
     public static void stop(){
-        mediaPlayer.stop();
-        mediaPlayer.release();
-        isStarted = false;
+        if(mediaPlayer != null) {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+            isStarted = false;
+        }
     }
 }

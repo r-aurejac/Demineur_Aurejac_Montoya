@@ -15,18 +15,18 @@ public class MainActivity extends AppCompatActivity {
     Button scoreButton,gameButton,optionsButton,helpButton;
     Navigator navigator;
     int difficulty;
-    MusicManager musicManager;
-    Preferences preferences;
+    //MusicManager musicManager;
+    //Preferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        preferences = new Preferences(getApplicationContext());
+        /*preferences = new Preferences(getApplicationContext());
         if(preferences.getMusicActivated()) {
             musicManager.start(getApplicationContext());
-        }
+        }*/
 
 
         navigator = new Navigator(getApplicationContext());

@@ -23,11 +23,18 @@ public class GameActivity extends AppCompatActivity implements CellListener {
     int cellSize = 170;
     int difficulty;
     ArrayList<CellFragment> cellFragments;
+    MusicManager musicManager;
+    Preferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        preferences = new Preferences(getApplicationContext());
+        if(preferences.getMusicActivated()) {
+            musicManager.start(getApplicationContext());
+        }
 
         relativeLayout = findViewById(R.id.relative_layout);
 
@@ -53,6 +60,21 @@ public class GameActivity extends AppCompatActivity implements CellListener {
 
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(preferences.getMusicActivated()) {
+            musicManager.stop();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(preferences.getMusicActivated()) {
+            musicManager.start(getApplicationContext());
+        }
+    }
 
     private void createGameBoard() {
 
