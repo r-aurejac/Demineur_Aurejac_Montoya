@@ -6,6 +6,10 @@ import android.content.SharedPreferences;
 public class Preferences {
     private static final String SOUND_ACTIVATED = "soundActivated";
     private static final String MUSIC_ACTIVATED = "musicActivated";
+    private static final String NB_LOST = "nbLost";
+    private static final String NB_WINS = "nbWins";
+    private static final String BEST_TIME = "bestTime";
+    private static final String NB_MINES = "nbMines";
     private static final String PREFS = "PREFS";
 
     SharedPreferences sharedPreferences;
@@ -44,36 +48,73 @@ public class Preferences {
         else return true;
 
     }
-/*
-    public void setProdByPage(int nb_ref) {
-        //si aucun utilisateur n'est sauvegardé, on ajouter [24,florent]
+
+    public void setNbMines(int nbMines) {
         sharedPreferences
                 .edit()
-                .putInt(PROD_BY_PAGE, nb_ref)
+                .putInt(NB_MINES, nbMines)
                 .apply();
 
 
     }
 
-    public int getRefByPage() {
-        if (sharedPreferences.contains(REF_BY_PAGE))
-            return sharedPreferences.getInt(REF_BY_PAGE, 20);
-        else return 20;
+    public int getNbMines() {
+        if (sharedPreferences.contains(NB_MINES))
+            return sharedPreferences.getInt(NB_MINES, 0);
+        else return 0;
 
     }
 
-    public String getExportPath() {
-        if (sharedPreferences.contains(EXPORT_PATH))
-            return sharedPreferences.getString(EXPORT_PATH, Environment.getExternalStorageDirectory().toString());
-        else return Environment.getExternalStorageDirectory().toString();
-    }
-
-    public void setExportPath(String path) {
+    public void setNbWins(int nbWins) {
         sharedPreferences
                 .edit()
-                .putString(EXPORT_PATH, path)
+                .putInt(NB_WINS, nbWins)
                 .apply();
+
+
     }
-    */
+
+    public int getNbWins() {
+        if (sharedPreferences.contains(NB_WINS))
+            return sharedPreferences.getInt(NB_WINS, 0);
+        else return 0;
+
+    }
+
+    public void setNbLost(int nbLost) {
+        sharedPreferences
+                .edit()
+                .putInt(NB_LOST, nbLost)
+                .apply();
+
+
+    }
+
+    public int getNbLost() {
+        if (sharedPreferences.contains(NB_LOST))
+            return sharedPreferences.getInt(NB_LOST, 0);
+        else return 0;
+
+    }
+
+    public void setBestTime(int bestTime) {
+        sharedPreferences
+                .edit()
+                .putInt(BEST_TIME, bestTime)
+                .apply();
+
+
+    }
+
+    public int getBestTime() {
+        if (sharedPreferences.contains(BEST_TIME))
+            return sharedPreferences.getInt(BEST_TIME, 0);
+        else return 0;
+
+    }
+
+
+
+
 
 }

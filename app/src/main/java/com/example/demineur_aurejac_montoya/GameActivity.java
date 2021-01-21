@@ -19,12 +19,13 @@ public class GameActivity extends AppCompatActivity implements CellListener {
     RelativeLayout relativeLayout;
     Minesweeper minesweeper;
     Navigator navigator;
+    int nbMines = 0;
     int yOffset = -12;
     int cellSize = 170;
     int difficulty;
     ArrayList<CellFragment> cellFragments;
-    MusicManager musicManager;
     Preferences preferences;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +34,7 @@ public class GameActivity extends AppCompatActivity implements CellListener {
 
         preferences = new Preferences(getApplicationContext());
         if(preferences.getMusicActivated()) {
-            musicManager.start(getApplicationContext());
+            MusicManager.start(getApplicationContext());
         }
 
         relativeLayout = findViewById(R.id.relative_layout);
@@ -44,13 +45,16 @@ public class GameActivity extends AppCompatActivity implements CellListener {
         }
         switch (difficulty) {
             case 0:
-                minesweeper = new Minesweeper(16, 4, 10);
+                nbMines = 10;
+                minesweeper = new Minesweeper(16, 4, nbMines);
                 break;
             case 1:
-                minesweeper = new Minesweeper(22, 4, 16);
+                nbMines = 16;
+                minesweeper = new Minesweeper(22, 4, nbMines);
                 break;
             case 2:
-                minesweeper = new Minesweeper(26, 4, 26);
+                nbMines = 26;
+                minesweeper = new Minesweeper(26, 4, nbMines);
                 break;
         }
 
@@ -64,7 +68,7 @@ public class GameActivity extends AppCompatActivity implements CellListener {
     protected void onPause() {
         super.onPause();
         if(preferences.getMusicActivated()) {
-            musicManager.stop();
+            MusicManager.stop();
         }
     }
 
@@ -72,7 +76,7 @@ public class GameActivity extends AppCompatActivity implements CellListener {
     protected void onResume() {
         super.onResume();
         if(preferences.getMusicActivated()) {
-            musicManager.start(getApplicationContext());
+            MusicManager.start(getApplicationContext());
         }
     }
 
@@ -114,13 +118,13 @@ public class GameActivity extends AppCompatActivity implements CellListener {
     private void updateAllCellFragments() {
         if (minesweeper.isLost || minesweeper.isWon) {
             for (CellFragment cellFragment : cellFragments) {
-                cellFragment.updatePicture(false);
+                cellFragment.updateCell(false);
                 cellFragment.islocked = true;
             }
         }
         else{
             for (CellFragment cellFragment : cellFragments) {
-                cellFragment.updatePicture(false);
+                cellFragment.updateCell(false);
             }
         }
     }
@@ -165,10 +169,13 @@ public class GameActivity extends AppCompatActivity implements CellListener {
         if(minesweeper.isLost)
         {
             delay(false);
+            preferences.setNbLost(preferences.getNbLost()+1);
+            preferences.setNbMines(preferences.getNbMines()+nbMines);
         }
         else if(minesweeper.isWon)
         {
             delay(true);
+            preferences.setNbWins(preferences.getNbWins()+1);
         }
     }
 

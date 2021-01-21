@@ -1,18 +1,15 @@
 package com.example.demineur_aurejac_montoya;
 
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
-import android.widget.Toast;
-
-import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,7 +27,7 @@ public class CellFragment extends Fragment {
     // TODO: Rename and change types of parameters
 
     CellListener cellListener;
-
+    Preferences preferences;
     HexagonImageView hexagonImageView;
     MinesweeperBox minesweeperBox;
     int X, Y;
@@ -66,7 +63,7 @@ public class CellFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_cell, container, false);
-
+        preferences = new Preferences(getActivity());
         hexagonImageView = view.findViewById(R.id.hexagon_image_view);
         hexagonImageView.setImageResource(R.drawable.empty);
         hexagonImageView.setOnClickListener(new View.OnClickListener() {
@@ -74,7 +71,7 @@ public class CellFragment extends Fragment {
             public void onClick(View view) {
                 if(!islocked) {
                     cellListener.onCellClicked(X, Y);
-                    updatePicture(true);
+                    updateCell(true);
                 }
             }
         });
@@ -83,7 +80,7 @@ public class CellFragment extends Fragment {
             public boolean onLongClick(View view) {
                 if(!islocked) {
                     minesweeperBox.setFlag();
-                    updatePicture(false);
+                    updateCell(false);
                 }
                 return true;
             }
@@ -93,7 +90,7 @@ public class CellFragment extends Fragment {
     }
 
 
-    public void updatePicture(boolean showClickAnimation)
+    public void updateCell(boolean isClicked)
     {
         switch(minesweeperBox.getState())
         {
@@ -101,8 +98,10 @@ public class CellFragment extends Fragment {
                 hexagonImageView.setImageResource(R.drawable.empty);
                 break;
             case 1 :
-                if(showClickAnimation)
-                hexagonImageView.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.click_animation));
+                if(isClicked) {
+                    playClickSound();
+                    hexagonImageView.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.click_animation));
+                }
                 switch(minesweeperBox.getNeighbours())
                 {
                     case 0 :
@@ -135,7 +134,10 @@ public class CellFragment extends Fragment {
                 hexagonImageView.setImageResource(R.drawable.guess);
                 break;
             case 4 :
-                hexagonImageView.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.mine_animation));
+                if(isClicked) {
+                    playExplosionSound();
+                    hexagonImageView.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.mine_animation));
+                }
                 hexagonImageView.setImageResource(R.drawable.red_mine);
                 break;
             case 5 :
@@ -147,6 +149,22 @@ public class CellFragment extends Fragment {
                 break;
         }
     }
+
+    private void playExplosionSound() {
+        if(preferences.getSoundActivated()) {
+            final MediaPlayer mp = MediaPlayer.create(getActivity(), R.raw.explosion);
+            mp.start();
+        }
+    }
+    private void playClickSound() {
+        if(preferences.getSoundActivated()) {
+            final MediaPlayer mp = MediaPlayer.create(getActivity(), R.raw.click);
+            mp.start();
+        }
+    }
+
+
+
 
     @Override
     public void onAttach(Context context) {
