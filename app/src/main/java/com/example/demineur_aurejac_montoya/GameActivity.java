@@ -31,7 +31,6 @@ public class GameActivity extends AppCompatActivity implements CellListener {
         Intent intent = getIntent();
         if(intent != null) {
             difficulty = (intent.getIntExtra("difficulty", 0));
-            Toast.makeText(this,String.valueOf(difficulty),Toast.LENGTH_SHORT).show();
         }
         switch(difficulty){
             case 0:
