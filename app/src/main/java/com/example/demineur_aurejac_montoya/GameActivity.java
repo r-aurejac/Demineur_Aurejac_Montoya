@@ -101,20 +101,12 @@ public class GameActivity extends AppCompatActivity implements CellListener {
     }
 
     @Override
-    protected void onStop(){
+    protected void onStop() {
         super.onStop();
-        if(preferences.getCounterActivated()) {
+        if (preferences.getCounterActivated()) {
             stopService(intentService);
             unbindService(myServiceConnection);
         }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        intentService.setAction("STOP");
-        timerService.executeStopForeground();
-        stopService(intentService);
     }
 
     private final ServiceConnection myServiceConnection = new ServiceConnection() {
