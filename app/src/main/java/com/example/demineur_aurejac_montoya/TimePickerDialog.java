@@ -51,8 +51,8 @@ public class TimePickerDialog extends Dialog {
             });
             secondsPicker.setMinValue(0);
             minutesPicker.setMinValue(0);
-            secondsPicker.setMaxValue(60);
-            minutesPicker.setMaxValue(60);
+            secondsPicker.setMaxValue(59);
+            minutesPicker.setMaxValue(59);
         }
 
 

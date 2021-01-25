@@ -15,7 +15,7 @@ import android.widget.TimePicker;
 
 
 public class OptionsActivity extends AppCompatActivity  {
-//
+
     Button back;
     Navigator navigator;
     Preferences preferences;
@@ -108,6 +108,7 @@ public class OptionsActivity extends AppCompatActivity  {
 
     private void updateViews()
     {
+        hideTime(!counterSwitch.isActivated());
         soundSwitch.setChecked(soundActivated);
         musicSwitch.setChecked(musicActivated);
         counterSwitch.setChecked(counterActivated);

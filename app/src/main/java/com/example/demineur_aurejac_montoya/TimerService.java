@@ -13,6 +13,7 @@ public class TimerService extends Service {
 
     private Handler handler;
     private Runnable runnable;
+    private int timer = -1;
 
     public class MyBinder extends Binder {
         TimerService getService(){
@@ -32,6 +33,7 @@ public class TimerService extends Service {
         handler = new Handler();
         runnable = new Runnable(){
             public void run(){
+                timer += 1;
                 handler.postDelayed(this, 1000);
                 Intent intent = new Intent(GameActivity.BROADCAST);
                 sendBroadcast(intent);
@@ -40,5 +42,13 @@ public class TimerService extends Service {
 
         handler.post(runnable);
         return START_STICKY;
+    }
+    public void executeStopForeground()
+    {
+        stopForeground(true);
+        this.onDestroy();
+    }
+    public int getTimer(){
+        return timer;
     }
 }

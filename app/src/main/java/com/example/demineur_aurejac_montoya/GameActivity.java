@@ -30,6 +30,7 @@ public class GameActivity extends AppCompatActivity implements CellListener {
     int nbMines = 0;
     int yOffset = -12;
     int cellSize = 170;
+    int headerOffset = 100;
     int difficulty;
     ArrayList<CellFragment> cellFragments;
     Preferences preferences;
@@ -43,6 +44,8 @@ public class GameActivity extends AppCompatActivity implements CellListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        timer = new Time(120);
 
         intentService = new Intent(this,TimerService.class);
         setContentView(R.layout.activity_game);
@@ -87,10 +90,8 @@ public class GameActivity extends AppCompatActivity implements CellListener {
     @Override
     protected void onStart(){
         super.onStart();
-        if(preferences.getCounterActivated()) {
-            startService(intentService);
-            bindService(intentService, myServiceConnection, Context.BIND_AUTO_CREATE);
-        }
+        startService(intentService);
+        bindService(intentService, myServiceConnection, Context.BIND_AUTO_CREATE);
     }
 
     @Override
@@ -100,6 +101,14 @@ public class GameActivity extends AppCompatActivity implements CellListener {
             stopService(intentService);
             unbindService(myServiceConnection);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        intentService.setAction("STOP");
+        timerService.executeStopForeground();
+        stopService(intentService);
     }
 
     private final ServiceConnection myServiceConnection = new ServiceConnection() {
