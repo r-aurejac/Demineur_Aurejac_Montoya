@@ -37,6 +37,7 @@ public class TimerService extends Service {
                 sendBroadcast(intent);
             }
         };
+
         handler.post(runnable);
         return START_STICKY;
     }
