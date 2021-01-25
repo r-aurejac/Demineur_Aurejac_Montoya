@@ -44,12 +44,13 @@ public class GameActivity extends AppCompatActivity implements CellListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        timer = new Time(120);
-
         intentService = new Intent(this,TimerService.class);
         setContentView(R.layout.activity_game);
 
         preferences = new Preferences(getApplicationContext());
+
+        timer = new Time(preferences.getCounterTime());
+
         if(preferences.getMusicActivated()) {
             MusicManager.start(getApplicationContext());
         }
@@ -86,15 +87,19 @@ public class GameActivity extends AppCompatActivity implements CellListener {
     @Override
     protected void onStart(){
         super.onStart();
-        startService(intentService);
-        bindService(intentService, myServiceConnection, Context.BIND_AUTO_CREATE);
+        if(preferences.getCounterActivated()) {
+            startService(intentService);
+            bindService(intentService, myServiceConnection, Context.BIND_AUTO_CREATE);
+        }
     }
 
     @Override
     protected void onStop(){
         super.onStop();
-        stopService(intentService);
-        unbindService(myServiceConnection);
+        if(preferences.getCounterActivated()) {
+            stopService(intentService);
+            unbindService(myServiceConnection);
+        }
     }
 
     private final ServiceConnection myServiceConnection = new ServiceConnection() {
@@ -132,6 +137,10 @@ public class GameActivity extends AppCompatActivity implements CellListener {
         public void onReceive(Context context, Intent intent) {
             timer.decrement();
             tv.setText(timer.display);
+            if(timer.nSeconds == 0 && !minesweeper.isLost){
+                minesweeper.isLost = true;
+                showEndGameDialog(false);
+            }
         }
     };
 
