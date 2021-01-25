@@ -15,7 +15,7 @@ import android.widget.TimePicker;
 
 
 public class OptionsActivity extends AppCompatActivity  {
-
+//
     Button back;
     Navigator navigator;
     Preferences preferences;
