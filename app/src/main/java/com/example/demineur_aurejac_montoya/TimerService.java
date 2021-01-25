@@ -13,6 +13,7 @@ public class TimerService extends Service {
 
     private Handler handler;
     private Runnable runnable;
+    private boolean killRunnable = false;
 
     public class MyBinder extends Binder {
         TimerService getService(){
@@ -32,13 +33,20 @@ public class TimerService extends Service {
         handler = new Handler();
         runnable = new Runnable(){
             public void run(){
-                handler.postDelayed(this, 1000);
-                Intent intent = new Intent(GameActivity.BROADCAST);
-                sendBroadcast(intent);
+                if(!killRunnable) {
+                    handler.postDelayed(this, 1000);
+                    Intent intent = new Intent(GameActivity.BROADCAST);
+                    sendBroadcast(intent);
+                }
             }
         };
-
         handler.post(runnable);
         return START_STICKY;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        killRunnable = true;
     }
 }

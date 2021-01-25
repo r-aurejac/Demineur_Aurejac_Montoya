@@ -6,7 +6,7 @@ public class Time {
 
     public Time(int nSeconds){
         this.nSeconds = nSeconds;
-        this.display = "00:00";
+        refresh();
     }
 
     public void increment(){

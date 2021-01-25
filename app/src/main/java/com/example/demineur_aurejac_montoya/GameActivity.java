@@ -49,15 +49,21 @@ public class GameActivity extends AppCompatActivity implements CellListener {
 
         preferences = new Preferences(getApplicationContext());
 
-        timer = new Time(preferences.getCounterTime());
+        tv = findViewById(R.id.timer_tv);
+
+        if(preferences.getCounterActivated()) {
+            timer = new Time(preferences.getCounterTime());
+            tv.setText(timer.display);
+        }
+        else{
+            tv.setVisibility(View.INVISIBLE);
+        }
 
         if(preferences.getMusicActivated()) {
             MusicManager.start(getApplicationContext());
         }
 
         relativeLayout = findViewById(R.id.relative_layout);
-
-        tv = findViewById(R.id.timer_tv);
 
         Intent intent = getIntent();
         if (intent != null) {
@@ -135,11 +141,13 @@ public class GameActivity extends AppCompatActivity implements CellListener {
     private BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            timer.decrement();
-            tv.setText(timer.display);
-            if(timer.nSeconds == 0 && !minesweeper.isLost){
-                minesweeper.isLost = true;
-                showEndGameDialog(false);
+            if(preferences.getCounterActivated()) {
+                timer.decrement();
+                tv.setText(timer.display);
+                if (timer.nSeconds == 0 && !minesweeper.isLost) {
+                    minesweeper.isLost = true;
+                    showEndGameDialog(false);
+                }
             }
         }
     };
