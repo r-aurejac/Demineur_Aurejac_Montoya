@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.AbsoluteLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -35,11 +36,16 @@ public class GameActivity extends AppCompatActivity implements CellListener {
     Intent intentService;
     private TimerService timerService;
     static public String BROADCAST = "com.cfc.demineur.event";
-    private int timer = 0;
+    private Time timer;
+
+    TextView tv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        timer = new Time(120);
+
         intentService = new Intent(this,TimerService.class);
         setContentView(R.layout.activity_game);
 
@@ -49,6 +55,8 @@ public class GameActivity extends AppCompatActivity implements CellListener {
         }
 
         relativeLayout = findViewById(R.id.relative_layout);
+
+        tv = findViewById(R.id.timer_tv);
 
         Intent intent = getIntent();
         if (intent != null) {
@@ -70,7 +78,7 @@ public class GameActivity extends AppCompatActivity implements CellListener {
         }
 
         cellFragments = new ArrayList<>();
-        createGameBoard();
+        //createGameBoard();
         navigator = new Navigator(this);
 
     }
@@ -122,7 +130,8 @@ public class GameActivity extends AppCompatActivity implements CellListener {
     private BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            timer ++;
+            timer.decrement();
+            tv.setText(timer.display);
         }
     };
 
