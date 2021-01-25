@@ -77,6 +77,7 @@ public class OptionsActivity extends AppCompatActivity  {
         updateViews();
     }
 
+
     private void showTimePickerDialog()
     {
         TimePickerDialog tpd=new TimePickerDialog(this);
