@@ -4,24 +4,29 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.DialogFragment;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 
-public class OptionsActivity extends AppCompatActivity implements android.app.TimePickerDialog.OnTimeSetListener {
+public class OptionsActivity extends AppCompatActivity  {
 
     Button back;
     Navigator navigator;
     Preferences preferences;
     boolean soundActivated = true;
     boolean musicActivated = true;
+    boolean counterActivated = false;
     SwitchCompat soundSwitch;
     SwitchCompat musicSwitch;
-    MusicManager musicManager;
+    SwitchCompat counterSwitch;
+
+    LinearLayout timeLinear;
     TextView timer_tv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +35,9 @@ public class OptionsActivity extends AppCompatActivity implements android.app.Ti
         navigator = new Navigator(getApplicationContext());
         preferences = new Preferences(getApplicationContext());
         soundSwitch =(SwitchCompat) findViewById(R.id.soundSwitch);
+        counterSwitch = (SwitchCompat) findViewById(R.id.counterSwitch);
         musicSwitch = (SwitchCompat) findViewById(R.id.musicSwitch);
+        timeLinear = (LinearLayout) findViewById(R.id.timer_layout);
         back = findViewById(R.id.button3);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,13 +57,19 @@ public class OptionsActivity extends AppCompatActivity implements android.app.Ti
                 preferences.setMusicActivated(musicSwitch.isChecked());
             }
         });
+        counterSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                preferences.setCounterActivated(counterSwitch.isChecked());
+                hideTime(!counterSwitch.isChecked());
+            }
+        });
 
         timer_tv = (TextView) findViewById(R.id.timer_tv);
         timer_tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogFragment timePicker = new TimePickerDialog();
-                timePicker.show(getSupportFragmentManager(), "Choisissez la durée");
+                showTimePickerDialog();
             }
         });
 
@@ -64,16 +77,31 @@ public class OptionsActivity extends AppCompatActivity implements android.app.Ti
         updateViews();
     }
 
-    @Override
-    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+    private void showTimePickerDialog()
+    {
+        TimePickerDialog tpd=new TimePickerDialog(this);
+        tpd.show();
+    }
+    public void setTime(int minutes, int seconds) {
 
-        timer_tv.setText("Hour: " + hourOfDay + " Minute: " + minute);
+        timer_tv.setText(String.valueOf(minutes) +" minutes et " + String .valueOf(seconds) + " secondes" );
+        preferences.setCounterTime(minutes*60+seconds);
     }
 
     private void setOptionsPreferences()
     {
         soundActivated = preferences.getSoundActivated();
         musicActivated = preferences.getMusicActivated();
+        counterActivated = preferences.getCounterActivated();
+
+    }
+
+    private void hideTime(boolean hide)
+    {
+        if(hide)
+        timeLinear.setVisibility(LinearLayout.GONE);
+        else
+            timeLinear.setVisibility(LinearLayout.VISIBLE);
 
     }
 
@@ -81,6 +109,11 @@ public class OptionsActivity extends AppCompatActivity implements android.app.Ti
     {
         soundSwitch.setChecked(soundActivated);
         musicSwitch.setChecked(musicActivated);
+        counterSwitch.setChecked(counterActivated);
+        int seconds = preferences.getCounterTime();
+        int minutes = seconds/60;
+        seconds = seconds -minutes*60;
+        timer_tv.setText(String.valueOf(minutes) +"minutes et " + String .valueOf(seconds) + "secondes" );
     }
 
 }

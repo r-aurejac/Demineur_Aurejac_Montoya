@@ -6,9 +6,11 @@ import android.content.SharedPreferences;
 public class Preferences {
     private static final String SOUND_ACTIVATED = "soundActivated";
     private static final String MUSIC_ACTIVATED = "musicActivated";
+    private static final String COUNTER_ACTIVATED = "counterActivated";
     private static final String NB_LOST = "nbLost";
     private static final String NB_WINS = "nbWins";
     private static final String BEST_TIME = "bestTime";
+    private static final String COUNTER_TIME = "counterTime";
     private static final String NB_MINES = "nbMines";
     private static final String PREFS = "PREFS";
 
@@ -34,6 +36,22 @@ public class Preferences {
         else return true;
 
     }
+
+    public void setCounterActivated(boolean counterActivated) {
+        sharedPreferences
+                .edit()
+                .putBoolean(COUNTER_ACTIVATED, counterActivated)
+                .apply();
+
+    }
+
+    public boolean getCounterActivated() {
+        if (sharedPreferences.contains(COUNTER_ACTIVATED))
+            return sharedPreferences.getBoolean(COUNTER_ACTIVATED, true);
+        else return true;
+
+    }
+
     public void setSoundActivated(boolean soundActivated) {
         sharedPreferences
                 .edit()
@@ -109,6 +127,22 @@ public class Preferences {
     public int getBestTime() {
         if (sharedPreferences.contains(BEST_TIME))
             return sharedPreferences.getInt(BEST_TIME, 0);
+        else return 0;
+
+    }
+
+    public void setCounterTime(int counterTime) {
+        sharedPreferences
+                .edit()
+                .putInt(COUNTER_TIME, counterTime)
+                .apply();
+
+
+    }
+
+    public int getCounterTime() {
+        if (sharedPreferences.contains(COUNTER_TIME))
+            return sharedPreferences.getInt(COUNTER_TIME, 0);
         else return 0;
 
     }

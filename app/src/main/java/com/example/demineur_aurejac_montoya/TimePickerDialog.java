@@ -7,24 +7,24 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-public class TimePickerDialog extends Dialog implements View.OnClickListener{
+public class TimePickerDialog extends Dialog {
 
 
-        private GameActivity activity;
+        private OptionsActivity activity;
         private Dialog dialog;
-        public Button mainMenuButton, replayButton;
+        public Button validerButton;
         private boolean isWon;
-        private TextView endTv;
-        private ImageView imageView;
+        private NumberPicker secondsPicker,minutesPicker;
 
-        public TimePickerDialog(GameActivity activity,boolean isWon) {
+
+        public TimePickerDialog(OptionsActivity activity) {
             super(activity);
 
-            this.isWon = isWon;
             this.activity = activity;
         }
 
@@ -36,44 +36,25 @@ public class TimePickerDialog extends Dialog implements View.OnClickListener{
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             requestWindowFeature(Window.FEATURE_NO_TITLE);
-            setContentView(R.layout.dialog_end_game);
-            setCancelable(false);
-            imageView = (ImageView) findViewById(R.id.image_view);
-            mainMenuButton = (Button) findViewById(R.id.main_menu_button);
-            replayButton = (Button) findViewById(R.id.replay_button);
-            endTv = (TextView) findViewById(R.id.end_tv);
+            setContentView(R.layout.dialog_time_picker);
 
 
-           // mainMenuButton.setOnClickListener(this);
-            //replayButton.setOnClickListener(this);
-
-
-            if(isWon)
-            {
-                imageView.setImageResource(R.drawable.trophy);
-                endTv.setText("Felicitation vous avez gagné !");
-            }
-            else
-            {
-                imageView.setImageResource(R.drawable.cry);
-                endTv.setText("Désolé vous avez perdu...");
-            }
-
+            validerButton = (Button) findViewById(R.id.valider_button);
+            secondsPicker = (NumberPicker) findViewById(R.id.seconds_picker) ;
+            minutesPicker = (NumberPicker) findViewById(R.id.minutes_picker) ;
+            validerButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    activity.setTime(minutesPicker.getValue(),secondsPicker.getValue());
+                    dismiss();
+                }
+            });
+            secondsPicker.setMinValue(0);
+            minutesPicker.setMinValue(0);
+            secondsPicker.setMaxValue(60);
+            minutesPicker.setMaxValue(60);
         }
 
-        @Override
-        public void onClick(View view) {
-            switch (view.getId()) {
-                case R.id.main_menu_button:
-                    activity.goToMainMenu();
-                    break;
-                case R.id.replay_button:
-                    activity.replay();
-                    break;
-                default:
-                    break;
-            }
-            dismiss();
-        }
+
 
     }

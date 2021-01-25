@@ -54,7 +54,7 @@
             android:text="Musique" />
 
         <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/timerSwitch"
+            android:id="@+id/counterSwitch"
             style="@style/Minesweeper"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -67,7 +67,7 @@
             android:id="@+id/timer_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="16dp"
             android:layout_weight="0"
             android:orientation="horizontal">
 
