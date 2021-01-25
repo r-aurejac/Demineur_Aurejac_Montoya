@@ -2,17 +2,17 @@ package com.example.demineur_aurejac_montoya;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.fragment.app.DialogFragment;
 
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.RadioGroup;
-import android.widget.Switch;
+import android.widget.TextView;
+import android.widget.TimePicker;
 
 
-public class OptionsActivity extends AppCompatActivity {
+public class OptionsActivity extends AppCompatActivity implements android.app.TimePickerDialog.OnTimeSetListener {
 
     Button back;
     Navigator navigator;
@@ -22,7 +22,7 @@ public class OptionsActivity extends AppCompatActivity {
     SwitchCompat soundSwitch;
     SwitchCompat musicSwitch;
     MusicManager musicManager;
-
+    TextView timer_tv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,8 +51,23 @@ public class OptionsActivity extends AppCompatActivity {
             }
         });
 
+        timer_tv = (TextView) findViewById(R.id.timer_tv);
+        timer_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment timePicker = new TimePickerDialog();
+                timePicker.show(getSupportFragmentManager(), "Choisissez la durée");
+            }
+        });
+
         setOptionsPreferences();
         updateViews();
+    }
+
+    @Override
+    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+
+        timer_tv.setText("Hour: " + hourOfDay + " Minute: " + minute);
     }
 
     private void setOptionsPreferences()

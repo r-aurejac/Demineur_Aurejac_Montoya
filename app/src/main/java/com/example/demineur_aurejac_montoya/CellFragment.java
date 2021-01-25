@@ -145,6 +145,7 @@ public class CellFragment extends Fragment {
                 hexagonImageView.setImageResource(R.drawable.mine);
                 break;
             case 6 :
+                playExplosionSound();
                 hexagonImageView.setImageResource(R.drawable.wrong_flag);
                 break;
         }

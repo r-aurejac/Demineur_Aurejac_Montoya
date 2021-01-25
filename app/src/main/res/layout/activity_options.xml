@@ -4,54 +4,97 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/fontColor"
     tools:context=".OptionsActivity">
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:background="#FBC52B"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="OPTIONS"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="20sp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/fontColor"
+
         android:orientation="vertical"
+        android:layout_margin="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:background="#FBC52B"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:text="OPTIONS"
-            android:textAlignment="center"
-            android:textColor="#000000"
-            android:textSize="20sp" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3">
 
         <androidx.appcompat.widget.SwitchCompat
-            android:layout_marginTop="16dp"
             android:id="@+id/soundSwitch"
             style="@style/Minesweeper"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:layout_weight="0"
             android:text="Son" />
 
         <androidx.appcompat.widget.SwitchCompat
-            android:layout_marginTop="16dp"
             android:id="@+id/musicSwitch"
             style="@style/Minesweeper"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:layout_weight="0"
             android:text="Musique" />
 
-        <Button
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/timerSwitch"
+            style="@style/Minesweeper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:layout_weight="0"
+            android:text="Mode contre la montre" />
+
+
+        <LinearLayout
+            android:id="@+id/timer_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_weight="0"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/Minesweeper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_weight="1"
+                android:text="Durée :" />
+
+            <TextView
+                android:id="@+id/timer_tv"
+                style="@style/ClickableText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:ems="10"
+                android:text="10 m"
+                android:textAlignment="textEnd" />
+        </LinearLayout>
+
+        <Button
             android:id="@+id/button3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:layout_weight="0"
             android:text="Retour" />
 

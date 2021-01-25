@@ -9,4 +9,10 @@
     tools:context=".ScoreActivity">
 
 
+    <TextView
+        android:id="@+id/timer_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        style="@style/Minesweeper"/>
 </RelativeLayout>
