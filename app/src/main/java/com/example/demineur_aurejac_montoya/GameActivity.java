@@ -96,16 +96,9 @@ public class GameActivity extends AppCompatActivity implements CellListener {
     @Override
     protected void onStart(){
         super.onStart();
-        startService(intentService);
-        bindService(intentService, myServiceConnection, Context.BIND_AUTO_CREATE);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if (preferences.getCounterActivated()) {
-            stopService(intentService);
-            unbindService(myServiceConnection);
+        if(preferences.getCounterActivated()) {
+            startService(intentService);
+            bindService(intentService, myServiceConnection, Context.BIND_AUTO_CREATE);
         }
     }
 
@@ -128,6 +121,10 @@ public class GameActivity extends AppCompatActivity implements CellListener {
             MusicManager.stop();
         }
         unregisterReceiver(receiver);
+        if (preferences.getCounterActivated()) {
+            stopService(intentService);
+            unbindService(myServiceConnection);
+        }
     }
 
     @Override
