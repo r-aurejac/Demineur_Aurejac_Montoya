@@ -2,9 +2,15 @@ package com.example.demineur_aurejac_montoya;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
 import android.widget.AbsoluteLayout;
@@ -13,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Timer;
 
 public class GameActivity extends AppCompatActivity implements CellListener {
 
@@ -25,11 +32,15 @@ public class GameActivity extends AppCompatActivity implements CellListener {
     int difficulty;
     ArrayList<CellFragment> cellFragments;
     Preferences preferences;
-
+    Intent intentService;
+    private TimerService timerService;
+    static public String BROADCAST = "com.cfc.demineur.event";
+    private int timer = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        intentService = new Intent(this,TimerService.class);
         setContentView(R.layout.activity_game);
 
         preferences = new Preferences(getApplicationContext());
@@ -65,11 +76,38 @@ public class GameActivity extends AppCompatActivity implements CellListener {
     }
 
     @Override
+    protected void onStart(){
+        super.onStart();
+        startService(intentService);
+        bindService(intentService, myServiceConnection, Context.BIND_AUTO_CREATE);
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+        stopService(intentService);
+        unbindService(myServiceConnection);
+    }
+
+    private final ServiceConnection myServiceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            timerService = ((TimerService.MyBinder) service).getService();
+
+        }
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            timerService = null;
+        }
+    };
+
+    @Override
     protected void onPause() {
         super.onPause();
         if(preferences.getMusicActivated()) {
             MusicManager.stop();
         }
+        unregisterReceiver(receiver);
     }
 
     @Override
@@ -78,7 +116,15 @@ public class GameActivity extends AppCompatActivity implements CellListener {
         if(preferences.getMusicActivated()) {
             MusicManager.start(getApplicationContext());
         }
+        registerReceiver(receiver,new IntentFilter(BROADCAST));
     }
+
+    private BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            timer ++;
+        }
+    };
 
     private void createGameBoard() {
 
