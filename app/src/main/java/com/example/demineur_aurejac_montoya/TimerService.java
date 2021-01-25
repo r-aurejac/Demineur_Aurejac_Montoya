@@ -40,6 +40,7 @@ public class TimerService extends Service {
                 }
             }
         };
+
         handler.post(runnable);
         return START_STICKY;
     }
