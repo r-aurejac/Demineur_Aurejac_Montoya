@@ -211,7 +211,7 @@ public class GameActivity extends AppCompatActivity implements CellListener {
     }
 
     void showEndGameDialog(boolean isWon) {
-        EndGameDialog egd = new EndGameDialog(this, isWon);
+        EndGameDialog egd = new EndGameDialog(this, isWon,counter.nSeconds);
         egd.show();
 
     }

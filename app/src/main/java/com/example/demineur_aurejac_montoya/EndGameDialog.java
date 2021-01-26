@@ -16,10 +16,11 @@ public class EndGameDialog extends Dialog implements View.OnClickListener {
     private boolean isWon;
     private TextView endTv;
     private ImageView imageView;
+    private int time = 0;
 
-    public EndGameDialog(GameActivity activity,boolean isWon) {
+    public EndGameDialog(GameActivity activity,boolean isWon, int time) {
         super(activity);
-
+        this.time = time;
         this.isWon = isWon;
         this.activity = activity;
     }
@@ -43,7 +44,11 @@ public class EndGameDialog extends Dialog implements View.OnClickListener {
         if(isWon)
         {
             imageView.setImageResource(R.drawable.trophy);
-            endTv.setText("Felicitation vous avez gagné !");
+            int seconds = time;
+            int minutes = seconds/60;
+            seconds = seconds -minutes*60;
+            String text = "Félicitation vous avez gagné !\n" + "Votre temps est de : " +String.valueOf(minutes) + " minutes et " + String .valueOf(seconds) + " secondes" ;
+            endTv.setText(text);
         }
         else
         {
