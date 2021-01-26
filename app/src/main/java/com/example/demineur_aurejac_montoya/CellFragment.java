@@ -80,6 +80,7 @@ public class CellFragment extends Fragment {
             public boolean onLongClick(View view) {
                 if(!islocked) {
                     minesweeperBox.setFlag();
+                    cellListener.onCellLongClicked(X, Y);
                     updateCell(false);
                 }
                 return true;

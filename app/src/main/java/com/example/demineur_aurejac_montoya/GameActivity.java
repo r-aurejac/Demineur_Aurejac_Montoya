@@ -36,6 +36,7 @@ public class GameActivity extends AppCompatActivity implements CellListener {
     private Time decounter, counter;
 
     TextView tv;
+    TextView tv2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +50,7 @@ public class GameActivity extends AppCompatActivity implements CellListener {
         preferences = new Preferences(getApplicationContext());
 
         tv = findViewById(R.id.timer_tv);
+        tv2 = findViewById(R.id.mine_tv);
 
 
         decounter = new Time(preferences.getCounterTime());
@@ -83,6 +85,7 @@ public class GameActivity extends AppCompatActivity implements CellListener {
         createGameBoard();
         navigator = new Navigator(this);
 
+        tv2.setText(String.valueOf(minesweeper.getnRemainingMines()));
     }
 
     @Override
@@ -183,6 +186,7 @@ public class GameActivity extends AppCompatActivity implements CellListener {
     }
 
     private void updateAllCellFragments() {
+        tv2.setText(String.valueOf(minesweeper.getnRemainingMines()));
         if (minesweeper.isLost || minesweeper.isWon) {
             for (CellFragment cellFragment : cellFragments) {
                 cellFragment.updateCell(false);
@@ -249,7 +253,8 @@ public class GameActivity extends AppCompatActivity implements CellListener {
         }
     }
 
-
-
-
+    @Override
+    public void onCellLongClicked(int x,int y){
+        updateAllCellFragments();
+    }
 }

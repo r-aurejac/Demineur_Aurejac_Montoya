@@ -231,4 +231,15 @@ public class Minesweeper {
     public MinesweeperBox[][] getGame(){
         return game;
     }
+    public int getnRemainingMines(){
+        int nFlags = 0;
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                if(game[i][j].getState() == 2) nFlags ++;
+            }
+        }
+        if(nRemainingMines<0) nRemainingMines = 0;
+        nRemainingMines = nMines - nFlags;
+        return nRemainingMines;
+    }
 }
