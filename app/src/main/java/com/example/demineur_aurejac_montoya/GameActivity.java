@@ -8,13 +8,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
+import android.view.Display;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -28,6 +31,7 @@ public class GameActivity extends AppCompatActivity implements CellListener {
     int cellSize = 170;
     int headerOffset = 100;
     int difficulty;
+    boolean isHardMode = false;
     ArrayList<CellFragment> cellFragments;
     Preferences preferences;
     Intent intentService;
@@ -42,6 +46,12 @@ public class GameActivity extends AppCompatActivity implements CellListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        float tempSize = size.y/2198f * cellSize;
+        cellSize = (int) tempSize;
+        Toast.makeText(this,String.valueOf(size.y),Toast.LENGTH_SHORT).show();
 
         counter= new Time(0);
         intentService = new Intent(this,TimerService.class);
@@ -78,6 +88,7 @@ public class GameActivity extends AppCompatActivity implements CellListener {
             case 2:
                 nbMines = 26;
                 minesweeper = new Minesweeper(26, 4, nbMines);
+                isHardMode = true;
                 break;
         }
 
@@ -211,7 +222,7 @@ public class GameActivity extends AppCompatActivity implements CellListener {
     }
 
     void showEndGameDialog(boolean isWon) {
-        EndGameDialog egd = new EndGameDialog(this, isWon,counter.nSeconds);
+        EndGameDialog egd = new EndGameDialog(this, isWon,counter.nSeconds-2);
         egd.show();
 
     }
@@ -248,7 +259,7 @@ public class GameActivity extends AppCompatActivity implements CellListener {
         {
             delay(true);
             preferences.setNbWins(preferences.getNbWins()+1);
-            if(counter.nSeconds<preferences.getBestTime())
+            if(counter.nSeconds<preferences.getBestTime()&&isHardMode)
             preferences.setBestTime(counter.nSeconds);
         }
     }

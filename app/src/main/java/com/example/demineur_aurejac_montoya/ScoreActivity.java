@@ -42,7 +42,7 @@ public class ScoreActivity extends AppCompatActivity {
         int seconds = preferences.getBestTime();
         int minutes = seconds/60;
         seconds = seconds -minutes*60;
-        bestTimeTv.setText(String.valueOf(minutes) +"minutes et " + String .valueOf(seconds) + "secondes" );
+        bestTimeTv.setText(String.valueOf(minutes) +" minutes et " + String .valueOf(seconds) + " secondes" );
 
     }
 }

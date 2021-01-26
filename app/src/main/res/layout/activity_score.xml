@@ -45,7 +45,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="MEILLEUR TEMPS" />
+                android:text="MEILLEUR TEMPS EN DIFFICILE" />
 
             <TextView
                 android:id="@+id/best_time_tv"
