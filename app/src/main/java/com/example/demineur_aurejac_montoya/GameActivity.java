@@ -244,6 +244,7 @@ public class GameActivity extends AppCompatActivity implements CellListener {
         {
             delay(true);
             preferences.setNbWins(preferences.getNbWins()+1);
+            if(counter.nSeconds<preferences.getBestTime())
             preferences.setBestTime(counter.nSeconds);
         }
     }
