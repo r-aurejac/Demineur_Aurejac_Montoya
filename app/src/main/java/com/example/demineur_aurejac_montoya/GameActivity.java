@@ -102,17 +102,14 @@ public class GameActivity extends AppCompatActivity implements CellListener {
     @Override
     protected void onStart(){
         super.onStart();
-
             startService(intentService);
             bindService(intentService, myServiceConnection, Context.BIND_AUTO_CREATE);
-
     }
 
     private final ServiceConnection myServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             timerService = ((TimerService.MyBinder) service).getService();
-
         }
         @Override
         public void onServiceDisconnected(ComponentName name) {
