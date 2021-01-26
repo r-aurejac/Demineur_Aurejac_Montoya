@@ -51,7 +51,7 @@ public class GameActivity extends AppCompatActivity implements CellListener {
         display.getSize(size);
         float tempSize = size.y/2198f * cellSize;
         cellSize = (int) tempSize;
-        Toast.makeText(this,String.valueOf(size.y),Toast.LENGTH_SHORT).show();
+
 
         counter= new Time(0);
         intentService = new Intent(this,TimerService.class);
