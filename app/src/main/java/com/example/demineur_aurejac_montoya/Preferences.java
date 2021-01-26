@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 public class Preferences {
     private static final String SOUND_ACTIVATED = "soundActivated";
     private static final String MUSIC_ACTIVATED = "musicActivated";
-    private static final String COUNTER_ACTIVATED = "counterActivated";
+    private static final String DECOUNTER_ACTIVATED = "decounterActivated";
     private static final String NB_LOST = "nbLost";
     private static final String NB_WINS = "nbWins";
     private static final String BEST_TIME = "bestTime";
@@ -37,17 +37,17 @@ public class Preferences {
 
     }
 
-    public void setCounterActivated(boolean counterActivated) {
+    public void setDecounterActivated(boolean counterActivated) {
         sharedPreferences
                 .edit()
-                .putBoolean(COUNTER_ACTIVATED, counterActivated)
+                .putBoolean(DECOUNTER_ACTIVATED, counterActivated)
                 .apply();
 
     }
 
-    public boolean getCounterActivated() {
-        if (sharedPreferences.contains(COUNTER_ACTIVATED))
-            return sharedPreferences.getBoolean(COUNTER_ACTIVATED, true);
+    public boolean getDecounterActivated() {
+        if (sharedPreferences.contains(DECOUNTER_ACTIVATED))
+            return sharedPreferences.getBoolean(DECOUNTER_ACTIVATED, true);
         else return true;
 
     }

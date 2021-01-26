@@ -11,16 +11,12 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
-import android.util.Log;
 import android.view.View;
-import android.widget.AbsoluteLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Timer;
 
 public class GameActivity extends AppCompatActivity implements CellListener {
 
@@ -37,7 +33,7 @@ public class GameActivity extends AppCompatActivity implements CellListener {
     Intent intentService;
     private TimerService timerService;
     static public String BROADCAST = "com.cfc.demineur.event";
-    private Time timer;
+    private Time decounter, counter;
 
     TextView tv;
 
@@ -45,8 +41,8 @@ public class GameActivity extends AppCompatActivity implements CellListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        timer = new Time(120);
 
+        counter= new Time(0);
         intentService = new Intent(this,TimerService.class);
         setContentView(R.layout.activity_game);
 
@@ -54,13 +50,9 @@ public class GameActivity extends AppCompatActivity implements CellListener {
 
         tv = findViewById(R.id.timer_tv);
 
-        if(preferences.getCounterActivated()) {
-            timer = new Time(preferences.getCounterTime());
-            tv.setText(timer.display);
-        }
-        else{
-            tv.setVisibility(View.INVISIBLE);
-        }
+
+        decounter = new Time(preferences.getCounterTime());
+
 
         if(preferences.getMusicActivated()) {
             MusicManager.start(getApplicationContext());
@@ -88,7 +80,7 @@ public class GameActivity extends AppCompatActivity implements CellListener {
         }
 
         cellFragments = new ArrayList<>();
-        //createGameBoard();
+        createGameBoard();
         navigator = new Navigator(this);
 
     }
@@ -96,10 +88,10 @@ public class GameActivity extends AppCompatActivity implements CellListener {
     @Override
     protected void onStart(){
         super.onStart();
-        if(preferences.getCounterActivated()) {
+
             startService(intentService);
             bindService(intentService, myServiceConnection, Context.BIND_AUTO_CREATE);
-        }
+
     }
 
     private final ServiceConnection myServiceConnection = new ServiceConnection() {
@@ -121,7 +113,7 @@ public class GameActivity extends AppCompatActivity implements CellListener {
             MusicManager.stop();
         }
         unregisterReceiver(receiver);
-        if (preferences.getCounterActivated()) {
+        if (preferences.getDecounterActivated()) {
             stopService(intentService);
             unbindService(myServiceConnection);
         }
@@ -139,13 +131,17 @@ public class GameActivity extends AppCompatActivity implements CellListener {
     private BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if(preferences.getCounterActivated()) {
-                timer.decrement();
-                tv.setText(timer.display);
-                if (timer.nSeconds == 0 && !minesweeper.isLost) {
+            counter.increment();
+
+            if (preferences.getDecounterActivated()) {
+                decounter.decrement();
+                tv.setText(decounter.display);
+                if (decounter.nSeconds == 0 && !minesweeper.isLost) {
                     minesweeper.isLost = true;
                     showEndGameDialog(false);
                 }
+            } else {
+                tv.setText(counter.display);
             }
         }
     };
@@ -156,11 +152,11 @@ public class GameActivity extends AppCompatActivity implements CellListener {
             for (int j = 0; j < minesweeper.getHeight(); j++) {
                 if (j % 2 == 0)
                     createCell((cellSize / 2) * i + cellSize * i,
-                            (cellSize / 2) * j + j * yOffset,
+                            headerOffset + (cellSize / 2) * j + j * yOffset,
                             minesweeper.getGame()[j][i], i, j);
                 else
                     createCell((cellSize / 4) + (cellSize / 2) * (i + 1) + cellSize * i,
-                            (cellSize / 2) * j + j * yOffset,
+                            headerOffset + (cellSize / 2) * j + j * yOffset,
                             minesweeper.getGame()[j][i], i, j);
             }
         }
@@ -223,6 +219,7 @@ public class GameActivity extends AppCompatActivity implements CellListener {
         @Override
         public void run () {
             // Do something after 5s = 5000ms
+            preferences.setNbLost(preferences.getNbLost()+1);
             showEndGameDialog(isWon);
         }
     },2000);
@@ -246,6 +243,7 @@ public class GameActivity extends AppCompatActivity implements CellListener {
         {
             delay(true);
             preferences.setNbWins(preferences.getNbWins()+1);
+            preferences.setBestTime(counter.nSeconds);
         }
     }
 

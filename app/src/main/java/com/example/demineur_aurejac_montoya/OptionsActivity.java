@@ -2,16 +2,13 @@ package com.example.demineur_aurejac_montoya;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
-import androidx.fragment.app.DialogFragment;
 
-import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.TimePicker;
 
 
 public class OptionsActivity extends AppCompatActivity  {
@@ -60,7 +57,7 @@ public class OptionsActivity extends AppCompatActivity  {
         counterSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                preferences.setCounterActivated(counterSwitch.isChecked());
+                preferences.setDecounterActivated(counterSwitch.isChecked());
                 hideTime(!counterSwitch.isChecked());
             }
         });
@@ -93,7 +90,7 @@ public class OptionsActivity extends AppCompatActivity  {
     {
         soundActivated = preferences.getSoundActivated();
         musicActivated = preferences.getMusicActivated();
-        counterActivated = preferences.getCounterActivated();
+        counterActivated = preferences.getDecounterActivated();
 
     }
 

@@ -39,6 +39,10 @@ public class ScoreActivity extends AppCompatActivity {
         nbLostTv.setText(String.valueOf(preferences.getNbLost()));
         nbWinsTv.setText(String.valueOf(preferences.getNbWins()));
         nbMinesTv.setText(String.valueOf(preferences.getNbMines()));
-        bestTimeTv.setText(String.valueOf(preferences.getBestTime()));
+        int seconds = preferences.getBestTime();
+        int minutes = seconds/60;
+        seconds = seconds -minutes*60;
+        bestTimeTv.setText(String.valueOf(minutes) +"minutes et " + String .valueOf(seconds) + "secondes" );
+
     }
 }
