@@ -113,10 +113,8 @@ public class GameActivity extends AppCompatActivity implements CellListener {
             MusicManager.stop();
         }
         unregisterReceiver(receiver);
-        if (preferences.getDecounterActivated()) {
-            stopService(intentService);
-            unbindService(myServiceConnection);
-        }
+        stopService(intentService);
+        unbindService(myServiceConnection);
     }
 
     @Override
@@ -133,15 +131,18 @@ public class GameActivity extends AppCompatActivity implements CellListener {
         public void onReceive(Context context, Intent intent) {
             counter.increment();
 
-            if (preferences.getDecounterActivated()) {
-                decounter.decrement();
-                tv.setText(decounter.display);
-                if (decounter.nSeconds == 0 && !minesweeper.isLost) {
-                    minesweeper.isLost = true;
-                    showEndGameDialog(false);
+            if (!minesweeper.isWon && !minesweeper.isLost) {
+                if (preferences.getDecounterActivated()) {
+                    decounter.decrement();
+                    tv.setText(decounter.display);
+                    if (decounter.nSeconds == 0) {
+                        minesweeper.isLost = true;
+                        showEndGameDialog(false);
+                    }
                 }
-            } else {
-                tv.setText(counter.display);
+                else {
+                    tv.setText(counter.display);
+                }
             }
         }
     };
