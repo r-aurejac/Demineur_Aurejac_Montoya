@@ -221,7 +221,6 @@ public class Minesweeper {
         }
         return false;
     }
-
     public int getHeight(){
         return height;
     }
