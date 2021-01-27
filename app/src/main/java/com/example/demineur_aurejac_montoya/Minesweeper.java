@@ -236,8 +236,8 @@ public class Minesweeper {
                 if(game[i][j].getState() == 2) nFlags ++;
             }
         }
-        if(nRemainingMines<0) nRemainingMines = 0;
         nRemainingMines = nMines - nFlags;
+        if(nRemainingMines<0) nRemainingMines = 0;
         return nRemainingMines;
     }
 }

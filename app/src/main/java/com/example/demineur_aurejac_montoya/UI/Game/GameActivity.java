@@ -48,8 +48,8 @@ public class GameActivity extends AppCompatActivity implements CellListener {
     static public String BROADCAST = "com.cfc.demineur.event";
     private Time decounter, counter;
 
-    TextView tv;
-    TextView tv2;
+    TextView timeTv;
+    TextView minesLeftTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,8 +64,8 @@ public class GameActivity extends AppCompatActivity implements CellListener {
 
         preferences = new Preferences(getApplicationContext());
 
-        tv = findViewById(R.id.timer_tv);
-        tv2 = findViewById(R.id.mine_tv);
+        timeTv = findViewById(R.id.timer_tv);
+        minesLeftTv = findViewById(R.id.mine_tv);
 
 
         decounter = new Time(preferences.getCounterTime()); // décompteur initilisé selon la durée choisi par l'utilisateur dans les options
@@ -101,7 +101,7 @@ public class GameActivity extends AppCompatActivity implements CellListener {
         createGameBoard();
         navigator = new Navigator(this);
 
-        tv2.setText(String.valueOf(minesweeper.getnRemainingMines()));
+        minesLeftTv.setText(String.valueOf(minesweeper.getnRemainingMines()));
     }
 
     @Override
@@ -161,14 +161,14 @@ public class GameActivity extends AppCompatActivity implements CellListener {
             if (!minesweeper.isWon && !minesweeper.isLost) {
                 if (preferences.getDecounterActivated()) {
                     decounter.decrement();
-                    tv.setText(decounter.display);
+                    timeTv.setText(decounter.display);
                     if (decounter.nSeconds == 0) {
                         minesweeper.isLost = true;
                         showEndGameDialog(false);
                     }
                 }
                 else {
-                    tv.setText(counter.display);
+                    timeTv.setText(counter.display);
                 }
             }
         }
@@ -211,7 +211,7 @@ public class GameActivity extends AppCompatActivity implements CellListener {
     }
 //misa à jour de toutes les cases
     private void updateAllCellFragments() {
-        tv2.setText(String.valueOf(minesweeper.getnRemainingMines()));
+        minesLeftTv.setText(String.valueOf(minesweeper.getnRemainingMines()));
         if (minesweeper.isLost || minesweeper.isWon) {
             for (CellFragment cellFragment : cellFragments) {
                 cellFragment.updateCell(false);
