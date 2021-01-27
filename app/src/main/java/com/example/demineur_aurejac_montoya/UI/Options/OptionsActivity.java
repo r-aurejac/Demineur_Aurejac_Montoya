@@ -1,4 +1,4 @@
-package com.example.demineur_aurejac_montoya;
+package com.example.demineur_aurejac_montoya.UI.Options;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
@@ -10,7 +10,11 @@ import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.demineur_aurejac_montoya.Navigator;
+import com.example.demineur_aurejac_montoya.Preferences;
+import com.example.demineur_aurejac_montoya.R;
 
+//classe permettant à l'utilisateur de renseigner ses préférences (son,musique et mode de jeu)
 public class OptionsActivity extends AppCompatActivity  {
 
     Button back;
@@ -112,7 +116,7 @@ public class OptionsActivity extends AppCompatActivity  {
         int seconds = preferences.getCounterTime();
         int minutes = seconds/60;
         seconds = seconds -minutes*60;
-        timer_tv.setText(String.valueOf(minutes) +"minutes et " + String .valueOf(seconds) + "secondes" );
+        timer_tv.setText(String.valueOf(minutes) +" minutes et " + String .valueOf(seconds) + " secondes" );
     }
 
 }

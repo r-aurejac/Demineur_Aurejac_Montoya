@@ -1,4 +1,4 @@
-package com.example.demineur_aurejac_montoya;
+package com.example.demineur_aurejac_montoya.UI.Game;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -8,6 +8,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.demineur_aurejac_montoya.R;
+
+
+//fenêtre de fin de partie
 public class EndGameDialog extends Dialog implements View.OnClickListener {
 
     private GameActivity activity;

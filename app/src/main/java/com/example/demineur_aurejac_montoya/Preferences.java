@@ -3,6 +3,9 @@ package com.example.demineur_aurejac_montoya;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+
+
+//gardes en mémoire des statistiques de jeu et des options définies par l'utilisateurs
 public class Preferences {
     private static final String SOUND_ACTIVATED = "soundActivated";
     private static final String MUSIC_ACTIVATED = "musicActivated";
@@ -22,6 +25,7 @@ public class Preferences {
         this.context = context;
     }
 
+    //musique activée ou pas par défaut
     public void setMusicActivated(boolean musicActivated) {
         sharedPreferences
                 .edit()
@@ -36,7 +40,7 @@ public class Preferences {
         else return true;
 
     }
-
+    //mode contre la montre activé ou pas par défaut
     public void setDecounterActivated(boolean counterActivated) {
         sharedPreferences
                 .edit()
@@ -52,6 +56,7 @@ public class Preferences {
 
     }
 
+    //sons activés ou pas par défaut
     public void setSoundActivated(boolean soundActivated) {
         sharedPreferences
                 .edit()
@@ -67,6 +72,7 @@ public class Preferences {
 
     }
 
+    //nombre de mines explosées depuis l'installation du jeu
     public void setNbMines(int nbMines) {
         sharedPreferences
                 .edit()
@@ -82,7 +88,7 @@ public class Preferences {
         else return 0;
 
     }
-
+    //nombre de victoires depuis l'installation du jeu
     public void setNbWins(int nbWins) {
         sharedPreferences
                 .edit()
@@ -99,6 +105,7 @@ public class Preferences {
 
     }
 
+    //nombre de défaites depuis l'installation du jeu
     public void setNbLost(int nbLost) {
         sharedPreferences
                 .edit()
@@ -115,6 +122,7 @@ public class Preferences {
 
     }
 
+    //meilleur temps en mode difficile enregistré depuis l'installation du jeu
     public void setBestTime(int bestTime) {
         sharedPreferences
                 .edit()
@@ -131,6 +139,7 @@ public class Preferences {
 
     }
 
+    //temps choisi par l'utilisteur pour le mode contre la montre
     public void setCounterTime(int counterTime) {
         sharedPreferences
                 .edit()
@@ -142,7 +151,7 @@ public class Preferences {
 
     public int getCounterTime() {
         if (sharedPreferences.contains(COUNTER_TIME))
-            return sharedPreferences.getInt(COUNTER_TIME, 0);
+            return sharedPreferences.getInt(COUNTER_TIME, 60);
         else return 0;
 
     }

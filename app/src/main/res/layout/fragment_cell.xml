@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CellFragment">
+    tools:context=".UI.Game.CellFragment">
 
-    <com.example.demineur_aurejac_montoya.HexagonImageView
+    <com.example.demineur_aurejac_montoya.UI.Game.HexagonImageView
         android:id="@+id/hexagon_image_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -1,4 +1,4 @@
-package com.example.demineur_aurejac_montoya;
+package com.example.demineur_aurejac_montoya.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.demineur_aurejac_montoya.Navigator;
+import com.example.demineur_aurejac_montoya.Preferences;
+import com.example.demineur_aurejac_montoya.R;
 
 public class ScoreActivity extends AppCompatActivity {
     TextView nbMinesTv,nbWinsTv,nbLostTv,bestTimeTv;
@@ -39,10 +43,14 @@ public class ScoreActivity extends AppCompatActivity {
         nbLostTv.setText(String.valueOf(preferences.getNbLost()));
         nbWinsTv.setText(String.valueOf(preferences.getNbWins()));
         nbMinesTv.setText(String.valueOf(preferences.getNbMines()));
+
         int seconds = preferences.getBestTime();
-        int minutes = seconds/60;
-        seconds = seconds -minutes*60;
-        bestTimeTv.setText(String.valueOf(minutes) +" minutes et " + String .valueOf(seconds) + " secondes" );
+        if(seconds != 0) {
+            int minutes = seconds / 60;
+            seconds = seconds - minutes * 60;
+            bestTimeTv.setText(String.valueOf(minutes) + " minutes et " + String.valueOf(seconds) + " secondes");
+        }
+        else bestTimeTv.setText("Aucun temps enregistré");
 
     }
 }

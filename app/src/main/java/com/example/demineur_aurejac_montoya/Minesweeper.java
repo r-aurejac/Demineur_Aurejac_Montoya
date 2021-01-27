@@ -3,7 +3,6 @@ package com.example.demineur_aurejac_montoya;
 import java.util.ArrayList;
 import java.util.Collections;
 
-//trucs à ajouter : option pause, première case trouvée ne peut pas etre une mine
 
 //avec les hexagones, on considère les indices des cases de la manière suivante
 //    0   1   2   3

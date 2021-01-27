@@ -1,4 +1,4 @@
-package com.example.demineur_aurejac_montoya;
+package com.example.demineur_aurejac_montoya.UI.Game;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -17,6 +17,8 @@ import android.widget.ImageView;
 
 import java.util.Map;
 
+
+//redéfinition de la classe imageview pour que l'image soit rognée en forme d'héxagone
 public class HexagonImageView extends androidx.appcompat.widget.AppCompatImageView {
     private Path hexagonPath;
     private Path hexagonBorderPath;
@@ -107,6 +109,7 @@ public class HexagonImageView extends androidx.appcompat.widget.AppCompatImageVi
         invalidate();
     }
 
+    //redéfinition du clic pour ignorer les clics hors de l'hexagone
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent( MotionEvent event ) {
@@ -122,6 +125,7 @@ public class HexagonImageView extends androidx.appcompat.widget.AppCompatImageVi
             else return false;
 
     }
+    //test si le point est dans l'hexagone
     public boolean isInsideHexagon(float x0, float y0, float d, float x, float y) {
         float dx = Math.abs(x - x0)/d;
         float dy = Math.abs(y - y0)/d;
@@ -140,6 +144,7 @@ public class HexagonImageView extends androidx.appcompat.widget.AppCompatImageVi
         super.onDraw(c);
     }
 
+    //récupère les dimension de la vue
     @Override
     public void onMeasure(int widthMeasureSpec, int heightMeasureSpec){
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);

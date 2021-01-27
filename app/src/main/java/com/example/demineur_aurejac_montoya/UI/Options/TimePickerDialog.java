@@ -1,4 +1,4 @@
-package com.example.demineur_aurejac_montoya;
+package com.example.demineur_aurejac_montoya.UI.Options;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -6,12 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.NumberPicker;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import com.example.demineur_aurejac_montoya.R;
+
+
+//fenêtre de selection d'une durée temporelle (mminutes et secondes)
 public class TimePickerDialog extends Dialog {
 
 

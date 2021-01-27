@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/fontColor"
-    tools:context=".OptionsActivity">
+    tools:context=".UI.Options.OptionsActivity">
 
     <TextView
         android:id="@+id/textView3"
@@ -87,6 +87,7 @@
                 android:layout_weight="0"
                 android:ems="10"
                 android:text="10 m"
+                android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24"
                 android:textAlignment="textEnd" />
         </LinearLayout>
 

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/fontColor"
-    tools:context=".ScoreActivity">
+    tools:context=".UI.ScoreActivity">
 
 
     <LinearLayout
@@ -37,9 +37,11 @@
             style="@style/Minesweeper"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_weight="0.035"
             android:text="TextView"
-            android:textAlignment="textEnd" />
+            android:textAlignment="textEnd"
+            android:textSize="18sp" />
 
         <ImageView
             android:id="@+id/imageView8"

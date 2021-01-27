@@ -3,6 +3,7 @@ package com.example.demineur_aurejac_montoya;
 import android.content.Context;
 import android.media.MediaPlayer;
 
+//classe de gestion de la musique
 public class MusicManager {
     private static MediaPlayer mediaPlayer;
     public static boolean isStarted = false;

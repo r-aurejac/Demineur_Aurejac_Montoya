@@ -1,15 +1,14 @@
-package com.example.demineur_aurejac_montoya;
+package com.example.demineur_aurejac_montoya.UI.Main;
 
-import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 
-import androidx.annotation.NonNull;
+import com.example.demineur_aurejac_montoya.R;
 
+//fenêtre qui s'affiche avant de lancer une partie permettant de choisir la difficulté
 public class ChooseDifficultyDialog extends Dialog implements View.OnClickListener {
 
     public MainActivity activity;

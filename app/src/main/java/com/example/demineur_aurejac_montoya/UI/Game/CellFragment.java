@@ -1,4 +1,4 @@
-package com.example.demineur_aurejac_montoya;
+package com.example.demineur_aurejac_montoya.UI.Game;
 
 import android.content.Context;
 import android.media.MediaPlayer;
@@ -11,20 +11,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link CellFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.example.demineur_aurejac_montoya.MinesweeperBox;
+import com.example.demineur_aurejac_montoya.Preferences;
+import com.example.demineur_aurejac_montoya.R;
+
+
+//classe représentant les cases du démineurs
+
 public class CellFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String MINESWEEPER_BOX = "minesweeperBox";
     private static final String X_COORD = "x_coord" ;
     private static final String Y_COORD = "y_coord" ;
 
-    // TODO: Rename and change types of parameters
+
 
     CellListener cellListener;
     Preferences preferences;
@@ -66,6 +67,8 @@ public class CellFragment extends Fragment {
         preferences = new Preferences(getActivity());
         hexagonImageView = view.findViewById(R.id.hexagon_image_view);
         hexagonImageView.setImageResource(R.drawable.empty);
+
+        //apui court
         hexagonImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,6 +78,8 @@ public class CellFragment extends Fragment {
                 }
             }
         });
+
+        //appui long
         hexagonImageView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
@@ -90,7 +95,7 @@ public class CellFragment extends Fragment {
         return view;
     }
 
-
+//mise à jour de l'image, déclanchement de son/animation en fonction de l'état de la case
     public void updateCell(boolean isClicked)
     {
         switch(minesweeperBox.getState())

@@ -1,4 +1,4 @@
-package com.example.demineur_aurejac_montoya;
+package com.example.demineur_aurejac_montoya.UI.Game;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,10 +17,19 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.demineur_aurejac_montoya.Minesweeper;
+import com.example.demineur_aurejac_montoya.MinesweeperBox;
+import com.example.demineur_aurejac_montoya.MusicManager;
+import com.example.demineur_aurejac_montoya.Navigator;
+import com.example.demineur_aurejac_montoya.Preferences;
+import com.example.demineur_aurejac_montoya.R;
+import com.example.demineur_aurejac_montoya.Time.Time;
+import com.example.demineur_aurejac_montoya.Time.TimerService;
 
 import java.util.ArrayList;
 
+//activité où se déroule les parties
 public class GameActivity extends AppCompatActivity implements CellListener {
 
     RelativeLayout relativeLayout;
@@ -46,14 +55,10 @@ public class GameActivity extends AppCompatActivity implements CellListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Display display = getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        float tempSize = size.y/2198f * cellSize;
-        cellSize = (int) tempSize;
 
+        calculateCellSize();
 
-        counter= new Time(0);
+        counter= new Time(0); //compteur initialisé à 0 seconde
         intentService = new Intent(this,TimerService.class);
         setContentView(R.layout.activity_game);
 
@@ -63,7 +68,7 @@ public class GameActivity extends AppCompatActivity implements CellListener {
         tv2 = findViewById(R.id.mine_tv);
 
 
-        decounter = new Time(preferences.getCounterTime());
+        decounter = new Time(preferences.getCounterTime()); // décompteur initilisé selon la durée choisi par l'utilisateur dans les options
 
 
         if(preferences.getMusicActivated()) {
@@ -137,6 +142,17 @@ public class GameActivity extends AppCompatActivity implements CellListener {
         registerReceiver(receiver,new IntentFilter(BROADCAST));
     }
 
+    //determine la taille des cases en fonction de la longueur de l'écran du téléphone
+    private void calculateCellSize()
+    {
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        float tempSize = size.y/2198f * cellSize;
+        cellSize = (int) tempSize;
+    }
+
+    //actulisation du compteur et du decompteur toutes les secondes
     private BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -158,6 +174,7 @@ public class GameActivity extends AppCompatActivity implements CellListener {
         }
     };
 
+    //Placement des cases du plateau
     private void createGameBoard() {
 
         for (int i = 0; i < minesweeper.getWidth(); i++) {
@@ -174,7 +191,7 @@ public class GameActivity extends AppCompatActivity implements CellListener {
         }
 
     }
-
+//création d'une case
     private void createCell(int x, int y, MinesweeperBox minesweeperBox, int line, int column) {
 
         CellFragment cellFragment = CellFragment.newInstance(minesweeperBox, line, column);
@@ -192,7 +209,7 @@ public class GameActivity extends AppCompatActivity implements CellListener {
         relativeLayout.addView(linearLayout, coords);
         cellFragments.add(cellFragment);
     }
-
+//misa à jour de toutes les cases
     private void updateAllCellFragments() {
         tv2.setText(String.valueOf(minesweeper.getnRemainingMines()));
         if (minesweeper.isLost || minesweeper.isWon) {
@@ -223,7 +240,7 @@ public class GameActivity extends AppCompatActivity implements CellListener {
         egd.show();
 
     }
-
+//délai de 2 secondes
     private void delay(final boolean isWon) {
     final Handler handler = new Handler();
      handler.postDelayed(new
@@ -238,6 +255,7 @@ public class GameActivity extends AppCompatActivity implements CellListener {
     },2000);
 }
 
+//gestion des clics
     @Override
     public void onCellClicked(int x,int y) {
         if(!minesweeper.isStarted){

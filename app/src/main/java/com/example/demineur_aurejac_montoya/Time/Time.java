@@ -1,5 +1,7 @@
-package com.example.demineur_aurejac_montoya;
+package com.example.demineur_aurejac_montoya.Time;
 
+
+//classe de gestion du temps
 public class Time {
     public int nSeconds;
     public String display;

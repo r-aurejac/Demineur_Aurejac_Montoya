@@ -1,5 +1,6 @@
 package com.example.demineur_aurejac_montoya;
 
+//coordonnées x et y d'un point en float
 public class FloatPoint {
     float x,y;
 

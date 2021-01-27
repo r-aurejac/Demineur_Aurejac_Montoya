@@ -1,32 +1,26 @@
-package com.example.demineur_aurejac_montoya;
+package com.example.demineur_aurejac_montoya.UI.Main;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
-import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
+import com.example.demineur_aurejac_montoya.Navigator;
+import com.example.demineur_aurejac_montoya.R;
+
+
+//menu principal
 public class MainActivity extends AppCompatActivity {
 
     Button scoreButton,gameButton,optionsButton,helpButton;
     Navigator navigator;
     int difficulty;
-    //MusicManager musicManager;
-    //Preferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        /*preferences = new Preferences(getApplicationContext());
-        if(preferences.getMusicActivated()) {
-            musicManager.start(getApplicationContext());
-        }*/
 
 
         navigator = new Navigator(getApplicationContext());

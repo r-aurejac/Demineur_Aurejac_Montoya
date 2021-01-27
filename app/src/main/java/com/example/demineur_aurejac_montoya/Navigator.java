@@ -3,6 +3,13 @@ package com.example.demineur_aurejac_montoya;
 import android.content.Context;
 import android.content.Intent;
 
+import com.example.demineur_aurejac_montoya.UI.Game.GameActivity;
+import com.example.demineur_aurejac_montoya.UI.HelpActivity;
+import com.example.demineur_aurejac_montoya.UI.Main.MainActivity;
+import com.example.demineur_aurejac_montoya.UI.Options.OptionsActivity;
+import com.example.demineur_aurejac_montoya.UI.ScoreActivity;
+
+//classe permettant la navigation entre les acivités
 public class Navigator {
 
     Context context;

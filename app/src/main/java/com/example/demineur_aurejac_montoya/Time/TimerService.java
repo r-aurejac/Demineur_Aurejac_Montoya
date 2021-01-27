@@ -1,14 +1,14 @@
-package com.example.demineur_aurejac_montoya;
+package com.example.demineur_aurejac_montoya.Time;
 
 import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.Handler;
 import android.os.IBinder;
-import android.widget.Toast;
 
-import java.sql.Time;
+import com.example.demineur_aurejac_montoya.UI.Game.GameActivity;
 
+//service permettant de compter les secondes
 public class TimerService extends Service {
 
     private Handler handler;
@@ -16,7 +16,7 @@ public class TimerService extends Service {
     private boolean killRunnable = false;
 
     public class MyBinder extends Binder {
-        TimerService getService(){
+        public TimerService getService(){
             return TimerService.this;
         }
     }
@@ -48,7 +48,6 @@ public class TimerService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        //Toast.makeText(this, "ton texte", Toast.LENGTH_SHORT).show();
         killRunnable = true;
     }
 }
